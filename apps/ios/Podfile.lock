@@ -1,0 +1,68 @@
+PODS:
+  - Alamofire (5.4.1)
+  - AmazonIVSPlayer (1.3.3)
+  - AppCenter (4.1.1):
+    - AppCenter/Analytics (= 4.1.1)
+    - AppCenter/Crashes (= 4.1.1)
+  - AppCenter/Analytics (4.1.1):
+    - AppCenter/Core
+  - AppCenter/Core (4.1.1)
+  - AppCenter/Crashes (4.1.1):
+    - AppCenter/Core
+  - DatadogSDK (1.6.0):
+    - Kronos (~> 4.2)
+  - InAppSettingsKit (3.3)
+  - KeychainAccess (4.2.1)
+  - Kronos (4.2.1)
+  - SVProgressHUD (2.2.5)
+  - SwiftyUserDefaults (5.3.0)
+  - TwilioConversationsClient (1.3.0)
+  - TwilioPlayer (1.0.0-rc33)
+  - TwilioVideo (4.3.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 5)
+  - AmazonIVSPlayer (= 1.3.3)
+  - AppCenter (~> 4)
+  - DatadogSDK (~> 1)
+  - InAppSettingsKit (~> 3)
+  - KeychainAccess (~> 4)
+  - SVProgressHUD (~> 2)
+  - SwiftyUserDefaults (~> 5)
+  - TwilioConversationsClient (~> 1)
+  - TwilioPlayer (= 1.0.0-rc33)
+  - TwilioVideo (~> 4)
+
+SPEC REPOS:
+  "git@github.com:twilio/cocoapod-specs-internal.git":
+    - TwilioPlayer
+  trunk:
+    - Alamofire
+    - AmazonIVSPlayer
+    - AppCenter
+    - DatadogSDK
+    - InAppSettingsKit
+    - KeychainAccess
+    - Kronos
+    - SVProgressHUD
+    - SwiftyUserDefaults
+    - TwilioConversationsClient
+    - TwilioVideo
+
+SPEC CHECKSUMS:
+  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  AmazonIVSPlayer: 43482c52521fbe36c6fdee48eb336fbcda87be7a
+  AppCenter: cd53e3ed3563cc720bcb806c9731a12389b40d44
+  DatadogSDK: f8d3b65909216d8f1a04c2ddb75a15784bf90fd2
+  InAppSettingsKit: c636b2b41166d30f488d2c809664f289694d64d8
+  KeychainAccess: 9b07f665298d13c3a85881bd3171f6f49b8151c1
+  Kronos: 0ca73a1c00dc9a49a0bab4a6ed42f282562a7058
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftyUserDefaults: 63f80248cf5bfb3458825d9a78f2eb7e1293a040
+  TwilioConversationsClient: e93711681b4076574060c9afa9a8da964b7478b3
+  TwilioPlayer: 804ee0b352b290ab06d0401ceeca90e9569bd539
+  TwilioVideo: 1ece3d954245b02244ea613408f6a4413ff54987
+
+PODFILE CHECKSUM: 7203284f9d3012cf14dee5c3537f3c3e8199d18c
+
+COCOAPODS: 1.10.0
