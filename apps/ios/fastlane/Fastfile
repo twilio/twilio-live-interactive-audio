@@ -11,14 +11,14 @@ platform :ios do
   end
 
   lane :internal_release do
-    if get_version_number(xcodeproj: PROJECT_PATH) != TAG
-      increment_version_number(version_number: TAG, xcodeproj: PROJECT_PATH)
-      commit_version_bump(message: "Increment version number [skip ci]", xcodeproj: PROJECT_PATH)
-      push_to_git_remote(remote_branch: "main")
-    end
+    # if get_version_number(xcodeproj: PROJECT_PATH) != TAG
+    #   increment_version_number(version_number: TAG, xcodeproj: PROJECT_PATH)
+    #   commit_version_bump(message: "Increment version number [skip ci]", xcodeproj: PROJECT_PATH)
+    #   push_to_git_remote(remote_branch: "main")
+    # end
 
     # Must hack the podfile so we can get TwilioPlayer from the internal podspec repo
-    sh "cp ../.circleci/Podfile ../Podfile"
+    sh "cp ../../.circleci/Podfile ../Podfile"
     cocoapods
 
     sh "sed -i '' 's/<#BACKEND_URL#>/\"#{ENV['BACKEND_URL']}\"/' ../LiveStream/LiveStream/API/Core/API.swift"
@@ -43,14 +43,14 @@ platform :ios do
       api_token: ENV["GITHUB_API_TOKEN"]
     )
 
-    appcenter_upload(
-      api_token: ENV["APP_CENTER_API_TOKEN"],
-      owner_name: ENV["APP_CENTER_OWNER_NAME"],
-      app_name: "LiveStream",
-      file: "LiveStream.ipa",
-      destinations: "Internal",
-      notify_testers: true,
-      release_notes: release["body"]
-    )
+    # appcenter_upload(
+    #   api_token: ENV["APP_CENTER_API_TOKEN"],
+    #   owner_name: ENV["APP_CENTER_OWNER_NAME"],
+    #   app_name: "LiveStream",
+    #   file: "LiveStream.ipa",
+    #   destinations: "Internal",
+    #   notify_testers: true,
+    #   release_notes: release["body"]
+    # )
   end
 end

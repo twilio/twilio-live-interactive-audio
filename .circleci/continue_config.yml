@@ -1,0 +1,65 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7.0
+  ruby: circleci/ruby@1.1.4
+
+parameters:
+  backend-updated:
+    type: boolean
+    default: false
+  ios-app-updated:
+    type: boolean
+    default: false
+
+executors:
+  macos_executor:
+    macos:
+      xcode: "13.0.0"
+
+jobs:
+  ios-app-release:
+    executor: macos_executor
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: Install secrets
+          command: |
+            cd "apps/ios"
+            base64 -D \<<< $SECRETS_TAR | tar -x      
+      - run: 
+          name: Configure Artifactory so private dependencies can be downloaded
+          command: |
+            chmod 600 .circleci/.netrc
+            cp .circleci/.netrc ~/.netrc
+            sed -i '' "s/ARTIFACTORY_USERNAME/${ARTIFACTORY_USERNAME}/g" ~/.netrc
+            sed -i '' "s/ARTIFACTORY_API_KEY/${ARTIFACTORY_API_KEY}/g" ~/.netrc
+      - run: 
+          name: Configure internal podspec repo
+          command: |
+            pod repo add cocoapod-specs-internal git@github.com:twilio/cocoapod-specs-internal.git
+      - run:
+          name: Configure backend URL
+          command: |
+            sed -i '' 's/<#BACKEND_URL#>/\"#{ENV['BACKEND_URL']}\"/' "apps/ios/LiveStream/LiveStream/API/Core/API.swift"
+      - run:
+          name: Setup code signing
+          command: sh .circleci/setup_code_signing.sh
+      - run:
+          name: Build and deploy to App Center
+          command: |
+            cd "apps/ios"
+            bundle exec fastlane internal_release
+      - store_artifacts:
+          path: "~/Library/Logs/gym"
+          destination: "gym"            
+workflows:
+  ios-app-release:
+    jobs:
+      - ios-app-release:
+          filters:
+            tags:
+              only: /^ios-\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/
