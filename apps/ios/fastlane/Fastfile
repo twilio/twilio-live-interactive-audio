@@ -1,0 +1,56 @@
+fastlane_version "2.28.3"
+
+default_platform :ios
+
+TAG = ENV["CIRCLE_TAG"]
+PROJECT_PATH = "LiveStream/LiveStream.xcodeproj"
+
+platform :ios do
+  before_all do
+    ensure_git_status_clean
+  end
+
+  lane :internal_release do
+    if get_version_number(xcodeproj: PROJECT_PATH) != TAG
+      increment_version_number(version_number: TAG, xcodeproj: PROJECT_PATH)
+      commit_version_bump(message: "Increment version number [skip ci]", xcodeproj: PROJECT_PATH)
+      push_to_git_remote(remote_branch: "main")
+    end
+
+    # Must hack the podfile so we can get TwilioPlayer from the internal podspec repo
+    sh "cp ../.circleci/Podfile ../Podfile"
+    cocoapods
+
+    sh "sed -i '' 's/<#BACKEND_URL#>/\"#{ENV['BACKEND_URL']}\"/' ../LiveStream/LiveStream/API/Core/API.swift"
+
+    gym(
+      scheme: "LiveStream",
+      export_options: {
+        method: "enterprise",
+        compileBitcode: false,
+        thinning: "<none>",
+        signingStyle: "manual",
+        signingCertificate: "iPhone Distribution: Twilio, Inc.",
+        provisioningProfiles: {
+          "com.twilio.LiveStream" => "LiveStream-Distribution"
+        }
+      }
+    ) 
+
+    release = get_github_release(
+      url: "twilio/twilio-audio-live-streaming-app-ios", 
+      version: TAG,
+      api_token: ENV["GITHUB_API_TOKEN"]
+    )
+
+    appcenter_upload(
+      api_token: ENV["APP_CENTER_API_TOKEN"],
+      owner_name: ENV["APP_CENTER_OWNER_NAME"],
+      app_name: "LiveStream",
+      file: "LiveStream.ipa",
+      destinations: "Internal",
+      notify_testers: true,
+      release_notes: release["body"]
+    )
+  end
+end
