@@ -1,0 +1,20 @@
+{
+  "name": "twilio-live-streaming-serverless-functions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "twilio-run",
+    "deploy": "twilio-run deploy --override-existing-project",
+    "logs": "twilio-run logs --tail"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.3",
+    "twilio": "^3.59.0",
+    "twilio-run": "^2.9.0"
+  }
+}
