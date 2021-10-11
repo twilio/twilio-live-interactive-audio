@@ -1,20 +1,22 @@
 {
-  "name": "twilio-live-streaming-serverless-functions",
+  "name": "twilio-live-interactive-audio",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "twilio-run",
-    "deploy": "twilio-run deploy --override-existing-project",
-    "logs": "twilio-run logs --tail"
+    "deploy": "bin/deploy.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.3",
-    "twilio": "^3.59.0",
-    "twilio-run": "^2.9.0"
+    "axios": "^0.21.3"
+  },
+  "devDependencies": {
+    "cli-ux": "^5.6.3",
+    "dotenv": "^10.0.0",
+    "fs-extra": "^10.0.0",
+    "twilio-run": "^3.2.2"
   }
 }
