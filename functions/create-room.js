@@ -59,6 +59,7 @@ exports.handler = async function (context, event, callback) {
         ExtensionContext: JSON.stringify({
           room: { name: room.sid },
           outputs: [playerStreamer.data.sid],
+          video: false
         }),
       }),
     });
