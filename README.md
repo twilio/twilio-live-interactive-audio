@@ -1,6 +1,6 @@
 # Twilio Live Interactive Audio
 
-This project demonstrates an interactive live audio streaming app that uses [Twilio Live](https://www.twilio.com/docs/live) and [Twilio Video](https://www.twilio.com/docs/video). The project is setup as a monorepo that contains the frontend reference applications for iOS (Web and Android coming soon). 
+This project demonstrates an interactive live audio streaming app that uses [Twilio Live](https://www.twilio.com/docs/live) and [Twilio Video](https://www.twilio.com/docs/video). The project is setup as a monorepo that contains the frontend reference applications for iOS. 
 
 ## Features
 

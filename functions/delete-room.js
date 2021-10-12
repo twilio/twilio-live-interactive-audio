@@ -1,9 +1,5 @@
 const axios = require('axios');
 
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 exports.handler = async function (context, event, callback) {
   const authHandler = require(Runtime.getAssets()['/passcode.js'].path);
   authHandler(context, event, callback);
@@ -30,8 +26,6 @@ exports.handler = async function (context, event, callback) {
       method: 'post',
       data: 'Status=ENDED',
     });
-
-    await sleep(2000);
 
     // Stop PlayerStreamer
     await axiosClient(`PlayerStreamers/${playerStreamerSid}`, {

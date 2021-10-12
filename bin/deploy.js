@@ -2,19 +2,11 @@
 
 require('dotenv').config();
 const { cli } = require('cli-ux');
-const fse = require('fs-extra');
-const appAssetsDir = 'assets';
-const functionCommonFiles = 'common';
 const promisify = require('util').promisify;
 const exec = promisify(require('child_process').exec);
 
 (async () => {
   try {
-    /**
-     * Copy the functions common files to the assets directory for twilio-run to deploy
-     */
-    fse.copySync(functionCommonFiles, appAssetsDir);
-
     /**
      * Deploy the builds and extract user output from the twilio-run command
      */
