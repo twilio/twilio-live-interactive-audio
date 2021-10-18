@@ -19,10 +19,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LiveAudioLaunchLogo" translatesAutoresizingMaskIntoConstraints="NO" id="VM5-Ib-cIu">
-                                <rect key="frame" x="0.0" y="127" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="127" width="414" height="325"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TwilioLaunchLogo" translatesAutoresizingMaskIntoConstraints="NO" id="RXQ-DR-Uqd">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="822"/>
+                                <rect key="frame" x="0.0" y="783" width="414" height="39"/>
                             </imageView>
                         </subviews>
                         <constraints>
@@ -33,8 +33,6 @@
                             <constraint firstAttribute="trailing" secondItem="2eg-tU-lia" secondAttribute="trailing" id="NXZ-8M-KQn"/>
                             <constraint firstAttribute="trailing" secondItem="VM5-Ib-cIu" secondAttribute="trailing" id="VPM-KI-Qat"/>
                             <constraint firstItem="VM5-Ib-cIu" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="fUp-Wu-AhN"/>
-                            <constraint firstItem="VM5-Ib-cIu" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="h8X-Ie-fXZ"/>
-                            <constraint firstItem="RXQ-DR-Uqd" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="iah-D5-kGd"/>
                             <constraint firstItem="VM5-Ib-cIu" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="127" id="lou-0F-fpU"/>
                             <constraint firstAttribute="bottom" secondItem="2eg-tU-lia" secondAttribute="bottom" id="xQn-fX-thA"/>
                             <constraint firstAttribute="trailing" secondItem="RXQ-DR-Uqd" secondAttribute="trailing" id="xUp-5h-e46"/>
