@@ -15,7 +15,7 @@
 //
 
 import Datadog
-import TwilioPlayer
+import TwilioLivePlayer
 
 class PlayerTelemetryLogger: NSObject {
     var isEnabled = false {

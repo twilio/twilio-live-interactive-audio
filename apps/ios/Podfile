@@ -9,7 +9,7 @@ target 'LiveStream' do
   project 'LiveStream/LiveStream.xcodeproj'
 
   pod 'Alamofire', '~> 5'
-  pod 'AmazonIVSPlayer', '1.3.3'
+  pod 'AmazonIVSPlayer', '1.5.0'
   pod 'AppCenter', '~> 4'
   pod 'DatadogSDK', '~> 1'
   pod 'InAppSettingsKit', '~> 3'
@@ -17,5 +17,6 @@ target 'LiveStream' do
   pod 'SVProgressHUD', '~> 2'
   pod 'SwiftyUserDefaults', '~> 5'
   pod 'TwilioConversationsClient', '~> 1'
+  pod 'TwilioLivePlayer', '1.0.0' # When updating this pod make sure AmazonIVSPlayer is correct version
   pod 'TwilioVideo', '~> 4'
 end

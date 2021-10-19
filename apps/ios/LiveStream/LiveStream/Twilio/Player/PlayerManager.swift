@@ -15,7 +15,7 @@
 //
 
 import AVFoundation
-import TwilioPlayer
+import TwilioLivePlayer
 
 class PlayerManager: NSObject, LiveStreamSpeakerSource {
     weak var delegate: LiveStreamSpeakerSourceDelegate?
