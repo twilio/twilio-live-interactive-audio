@@ -17,6 +17,6 @@ target 'LiveStream' do
   pod 'SVProgressHUD', '~> 2'
   pod 'SwiftyUserDefaults', '~> 5'
   pod 'TwilioConversationsClient', '~> 1'
-  pod 'TwilioLivePlayer', '1.0.0' # When updating this pod make sure AmazonIVSPlayer is correct version
+  pod 'TwilioLivePlayer', '1.0.0' # When updating this pod make sure AmazonIVSPlayer is correct version also
   pod 'TwilioVideo', '~> 4'
 end
