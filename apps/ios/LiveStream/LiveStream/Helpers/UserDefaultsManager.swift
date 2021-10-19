@@ -16,7 +16,7 @@
 
 import InAppSettingsKit
 import SwiftyUserDefaults
-import TwilioPlayer
+import TwilioLivePlayer
 import TwilioVideo
 
 class UserDefaultsManager {
