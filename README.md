@@ -70,3 +70,7 @@ If you make any changes to the application, then you can run `npm run deploy` ag
 1. Enter the passcode from the backend deployment in the `Passcode` field
 1. Tap `Sign in`
 1. Tap a room in the list to join or tap `Create new room` to create a new room
+
+## Services Used
+
+This application uses Twilio Functions and Twilio Conversations in addition to Twilio Video Rooms and Twilio Live resources. Note that by deploying and using this application, your will be incurring usage for these services and will be billed for usage.
