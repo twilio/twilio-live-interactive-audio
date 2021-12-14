@@ -55,6 +55,7 @@ exports.handler = async function (context, event, callback) {
     mediaProcessor = await axiosClient('MediaProcessors', {
       method: 'post',
       data: querystring.stringify({
+        MaxDuration: 60 * 30, // Set maxDuration to 30 minutes
         Extension: context.MEDIA_EXTENSION,
         ExtensionContext: JSON.stringify({
           room: { name: room.sid },
