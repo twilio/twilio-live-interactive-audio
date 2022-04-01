@@ -118,7 +118,6 @@ platform :ios do
     )
   end
 
-  desc "Get local api key - assumes you have downloaded the api key to the project directory"
   private_lane :get_app_store_connect_api_key do
     app_store_connect_api_key(
       key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
