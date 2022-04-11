@@ -33,7 +33,7 @@ class API {
     private let session = Session()
     private let jsonEncoder = JSONEncoder()
     private let jsonDecoder = JSONDecoder()
-    private let url = <#BACKEND_URL#>
+    private let url: String = <#BACKEND_URL#>
 
     init() {
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
