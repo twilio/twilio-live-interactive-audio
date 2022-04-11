@@ -21,9 +21,9 @@ class API {
     static var shared = API()
     
     var environment: TwilioEnvironment {
-        if url.hasSuffix("stage.twil.io") {
+        if url.hasSuffix("dev.stage.twil.io") {
             return .stage
-        } else if url.hasSuffix("dev.twil.io") {
+        } else if url.hasSuffix("dev.dev.twil.io") {
             return .dev
         } else {
             return .prod
