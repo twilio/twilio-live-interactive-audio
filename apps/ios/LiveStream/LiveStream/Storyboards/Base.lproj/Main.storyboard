@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RDM-Qv-X8g">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RDM-Qv-X8g">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -48,7 +47,7 @@
                     <navigationItem key="navigationItem" title="Rooms" id="W6S-Ea-HyQ">
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="mCI-h0-8Wq">
                             <connections>
-                                <segue destination="ZGF-0e-8sO" kind="presentation" identifier="Settings" id="qVH-j7-olX"/>
+                                <action selector="settingsTap:" destination="ojp-HD-xpY" id="I14-WZ-Mbg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -57,55 +56,15 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
-                        <segue destination="CaD-fe-F91" kind="presentation" identifier="SignIn" animates="NO" id="zOR-fi-8NF"/>
-                        <segue destination="CaD-fe-F91" kind="presentation" identifier="SignOut" id="8Rb-gB-LNR"/>
+                        <segue destination="CaD-fe-F91" kind="presentation" identifier="SignIn" animates="NO" id="VOP-z9-WVb"/>
+                        <segue destination="CaD-fe-F91" kind="presentation" identifier="SignOut" id="UOo-3l-kfr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bmz-hT-vuI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1610" y="143"/>
         </scene>
-        <!--Settings-->
-        <scene sceneID="2un-O0-orI">
-            <objects>
-                <tableViewController id="G0G-qJ-FjW" customClass="IASKAppSettingsViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="1mn-l0-J9v">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="G0G-qJ-FjW" id="qbd-PR-dml"/>
-                            <outlet property="delegate" destination="G0G-qJ-FjW" id="0f3-Ne-ZYc"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="EwB-ar-cj0"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="showDoneButton" value="YES"/>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="neverShowPrivacySettings" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Gq-2x-bjb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3901" y="-1010"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="X97-0b-0xy">
-            <objects>
-                <navigationController id="ZGF-0e-8sO" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="6tE-SJ-kP5"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wKB-pE-AaR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="G0G-qJ-FjW" kind="relationship" relationship="rootViewController" id="tyq-ZS-Fm2"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kv5-IH-v4n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3012" y="-1010"/>
-        </scene>
-        <!--Sign In-->
+        <!--Sign In View Controller-->
         <scene sceneID="gld-ar-obO">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="CaD-fe-F91" customClass="SignInViewController" customModule="LiveStream" customModuleProvider="target" sceneMemberID="viewController">
@@ -159,7 +118,7 @@
                             <constraint firstItem="llE-6F-zBy" firstAttribute="leading" secondItem="hSq-0b-8tQ" secondAttribute="leading" constant="20" id="gTo-gi-odZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Sign In" id="5LO-Zt-JWu"/>
+                    <navigationItem key="navigationItem" id="5LO-Zt-JWu"/>
                     <connections>
                         <outlet property="nameLabel" destination="qFn-jU-IFt" id="cIb-fY-ST7"/>
                         <outlet property="passcodeLabel" destination="21M-oC-Dnt" id="6fr-mF-rTo"/>
@@ -167,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Y4-Wm-4bU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3012" y="733"/>
+            <point key="canvasLocation" x="3012" y="647"/>
         </scene>
         <!--Room View Controller-->
         <scene sceneID="nXb-u5-bRW">
@@ -245,12 +204,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zOR-fi-8NF"/>
+        <segue reference="UOo-3l-kfr"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0074434732090000004" green="0.38435810799999998" blue="0.87047934530000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-    <resources>
-        <systemColor name="systemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-    </resources>
 </document>

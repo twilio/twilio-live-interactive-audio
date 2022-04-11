@@ -14,15 +14,16 @@
 //  limitations under the License.
 //
 
-import SwiftyUserDefaults
+import Foundation
 
 class AuthStore {
     static let shared = AuthStore()
-    var isSignedIn: Bool { keychainStore.passcode != nil && !Defaults.userIdentity.isEmpty }
+    var isSignedIn: Bool { keychainStore.passcode != nil && !appSettingsManager.userIdentity.isEmpty }
     var passcode: String? { keychainStore.passcode }
-    var userIdentity: String { Defaults.userIdentity }
+    var userIdentity: String { appSettingsManager.userIdentity }
     private let api = API.shared
     private let keychainStore = KeychainStore()
+    private let appSettingsManager = AppSettingsManager.shared
 
     func signIn(userIdentity: String, passcode: String, completion: @escaping (Error?) -> Void) {
         let request = GetRoomsRequest(passcode: passcode)
@@ -33,7 +34,7 @@ class AuthStore {
             switch result {
             case .success:
                 self.keychainStore.passcode = passcode
-                Defaults.userIdentity = userIdentity
+                self.appSettingsManager.userIdentity = userIdentity
                 completion(nil)
             case let .failure(error):
                 completion(error)
@@ -43,6 +44,6 @@ class AuthStore {
 
     func signOut() {
         keychainStore.passcode = nil
-        Defaults.removeAll()
+        appSettingsManager.reset()
     }
 }
