@@ -11,7 +11,9 @@ const exec = promisify(require('child_process').exec);
      * Deploy the builds and extract user output from the twilio-run command
      */
     cli.action.start('deploying functions');
-    const { stdout } = await exec('npx twilio-run deploy --override-existing-project');
+    const region = process.env.TWILIO_REGION;
+    const regionOption = region === 'dev' || region === 'stage' ? `--region=${region} ` : ``;
+    const { stdout } = await exec(`npx twilio-run deploy ${regionOption}--override-existing-project`);
     const twilioRunOutputRegex = RegExp('domain\\s+(?<domain>.*)', 'm');
     const match = stdout.match(twilioRunOutputRegex);
     if (match.groups && match.groups.domain) {

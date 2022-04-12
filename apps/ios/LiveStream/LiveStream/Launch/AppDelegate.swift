@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppCenterManager().start()
         DatadogManager.shared.configure()
         UIConfigStore().start()
-        UserDefaultsManager().registerDefaults()
 
         return true
     }

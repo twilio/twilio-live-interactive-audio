@@ -43,9 +43,15 @@ class ConversationManager: NSObject {
         self.userIdentity = userIdentity
         self.conversationSID = conversationSID
 
+        let properties = TwilioConversationsClientProperties()
+        
+        if let region = API.shared.environment.region {
+            properties.region = region /// Only used by Twilio employees for internal testing
+        }
+
         TwilioConversationsClient.conversationsClient(
             withToken: accessToken,
-            properties: nil,
+            properties: properties,
             delegate: self
         ) { [weak self] result, client in
             guard let client = client else { self?.handleError(result.error!); return }
