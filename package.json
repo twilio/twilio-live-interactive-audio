@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "bin/deploy.js"
+    "deploy": "bin/deploy.js",
+    "remove": "bin/remove.js",
+    "postremove": "rm .twiliodeployinfo"
   },
   "keywords": [],
   "author": "",
