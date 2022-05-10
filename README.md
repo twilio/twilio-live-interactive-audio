@@ -52,6 +52,8 @@ Backend URL: https://twilio-live-interactive-audio-7873-dev.twil.io
 
 If you make any changes to the application, then you can run `npm run deploy` again and subsequent deploys will override your existing app.
 
+If you encounter any deploy errors, try to run `npm run remove` and then `npm run deploy` again.
+
 ### Run the iOS app
 
 #### Configure Backend URL
