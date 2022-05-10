@@ -13,7 +13,7 @@ PODS:
     - Kronos (~> 4.2)
   - KeychainAccess (4.2.2)
   - Kronos (4.2.1)
-  - SVProgressHUD (2.2.5)
+  - MBProgressHUD (1.2.0)
   - TwilioConversationsClient (1.3.1)
   - TwilioLivePlayer (1.0.1)
   - TwilioVideo (4.6.3)
@@ -24,7 +24,7 @@ DEPENDENCIES:
   - AppCenter (~> 4)
   - DatadogSDK (~> 1)
   - KeychainAccess (~> 4)
-  - SVProgressHUD (~> 2)
+  - MBProgressHUD
   - TwilioConversationsClient (~> 1)
   - TwilioLivePlayer (= 1.0.1)
   - TwilioVideo (~> 4)
@@ -37,7 +37,7 @@ SPEC REPOS:
     - DatadogSDK
     - KeychainAccess
     - Kronos
-    - SVProgressHUD
+    - MBProgressHUD
     - TwilioConversationsClient
     - TwilioLivePlayer
     - TwilioVideo
@@ -49,11 +49,11 @@ SPEC CHECKSUMS:
   DatadogSDK: 70bd7f07d902c0e5835bba87ff0cfcf642cc5a91
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   Kronos: 0ca73a1c00dc9a49a0bab4a6ed42f282562a7058
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   TwilioConversationsClient: 10e017b8ef6e6286b444222fffac02914df85b9d
   TwilioLivePlayer: 65ce90f2dbbb4209fb3ae366e344feb060498596
   TwilioVideo: 4afaac028c5886f2f3b313a9fcc146a6b7ca34e2
 
-PODFILE CHECKSUM: 3e2665e2788016918063f4dd38a28b8a97481e99
+PODFILE CHECKSUM: 89a85bb2fb9ee087b39b886d58d42ed2d9cb2bbe
 
 COCOAPODS: 1.10.0

@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-import SVProgressHUD
+import MBProgressHUD
 import UIKit
 
 class SignInViewController: UIViewController {
@@ -29,13 +29,13 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signInTap(_ sender: Any) {
-        SVProgressHUD.show()
+        let hud = MBProgressHUD.showAdded(to: view, animated: true)
         
         authStore.signIn(
             userIdentity: nameLabel.text?.trimmingCharacters(in: .whitespaces) ?? "",
             passcode: passcodeLabel.text ?? ""
         ) { [weak self] error in
-            SVProgressHUD.dismiss()
+            hud.hide(animated: true)
 
             if let error = error {
                 self?.present(error: error)

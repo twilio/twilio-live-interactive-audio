@@ -33,7 +33,6 @@
 		DCA23F8E25F986D80076C4FC /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23F8D25F986D70076C4FC /* RoundedButton.swift */; };
 		DCA23F9125F9891A0076C4FC /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23F9025F9891A0076C4FC /* FormTextField.swift */; };
 		DCA23F9425F998170076C4FC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23F9325F998170076C4FC /* Colors.swift */; };
-		DCA23FA325FAD3AB0076C4FC /* UIConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23FA225FAD3AB0076C4FC /* UIConfigStore.swift */; };
 		DCA23FC825FC1C1F0076C4FC /* LiveStreamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23FC725FC1C1F0076C4FC /* LiveStreamError.swift */; };
 		DCA23FD325FD23600076C4FC /* PresentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23FD225FD23600076C4FC /* PresentError.swift */; };
 		DCA2400325FFB0E60076C4FC /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23FEB25FFB0E50076C4FC /* RoomManager.swift */; };
@@ -108,7 +107,6 @@
 		DCA23F8D25F986D70076C4FC /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		DCA23F9025F9891A0076C4FC /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		DCA23F9325F998170076C4FC /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		DCA23FA225FAD3AB0076C4FC /* UIConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConfigStore.swift; sourceTree = "<group>"; };
 		DCA23FC725FC1C1F0076C4FC /* LiveStreamError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamError.swift; sourceTree = "<group>"; };
 		DCA23FD225FD23600076C4FC /* PresentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentError.swift; sourceTree = "<group>"; };
 		DCA23FEB25FFB0E50076C4FC /* RoomManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomManager.swift; sourceTree = "<group>"; };
@@ -283,7 +281,6 @@
 				DCA23F0325F975F00076C4FC /* Auth */,
 				DCB0724426729B9500FB97BD /* Datadog */,
 				DCA23F1725F976650076C4FC /* Keychain */,
-				DCA23FA525FBD8B30076C4FC /* UIConfig */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -373,14 +370,6 @@
 				DCF901F1262CB95100983B3A /* ToolbarButton */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		DCA23FA525FBD8B30076C4FC /* UIConfig */ = {
-			isa = PBXGroup;
-			children = (
-				DCA23FA225FAD3AB0076C4FC /* UIConfigStore.swift */,
-			);
-			path = UIConfig;
 			sourceTree = "<group>";
 		};
 		DCA23FE225FFB0E50076C4FC /* Twilio */ = {
@@ -691,7 +680,6 @@
 				DCA23F1A25F976650076C4FC /* KeychainStorage.swift in Sources */,
 				DCA23EDE25F93C580076C4FC /* AppDelegate.swift in Sources */,
 				DCADF34027FCF0CE0093A9FE /* TwilioEnvironment.swift in Sources */,
-				DCA23FA325FAD3AB0076C4FC /* UIConfigStore.swift in Sources */,
 				DCBFBEFC26306ADB007F6424 /* LiveStreamAudience.swift in Sources */,
 				DCCDEDFE261C96AF0020A092 /* GetRoomsResponse.swift in Sources */,
 				DCEA90222627B7E200969DFF /* LeaveRoomResponse.swift in Sources */,

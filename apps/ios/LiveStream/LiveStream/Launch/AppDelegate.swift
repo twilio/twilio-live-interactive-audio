@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         AppCenterManager().start()
         DatadogManager.shared.configure()
-        UIConfigStore().start()
 
         return true
     }
