@@ -71,9 +71,9 @@ class ConversationManager: NSObject {
     }
         
     func sendMessage(message: ConversationMessage) {
-        guard let options = message.options else { return }
-        
-        conversation?.sendMessage(with: options, completion: nil)
+        guard let attributes = message.attributes else { return }
+
+        conversation?.prepareMessage().setAttributes(attributes, error: nil).buildAndSend(completion: nil)
     }
     
     private func getConversation() {
