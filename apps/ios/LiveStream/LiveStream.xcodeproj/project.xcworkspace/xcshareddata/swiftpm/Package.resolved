@@ -1,0 +1,88 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire",
+        "state": {
+          "branch": null,
+          "revision": "354dda32d89fc8cd4f5c46487f64957d355f53d8",
+          "version": "5.6.1"
+        }
+      },
+      {
+        "package": "AppCenter",
+        "repositoryURL": "https://github.com/microsoft/appcenter-sdk-apple",
+        "state": {
+          "branch": null,
+          "revision": "8354a50fe01a7e54e196d3b5493b5ab53dd5866a",
+          "version": "4.4.2"
+        }
+      },
+      {
+        "package": "TwilioConversationsClient",
+        "repositoryURL": "https://github.com/twilio/conversations-ios",
+        "state": {
+          "branch": null,
+          "revision": "df44d958cdc810d343b06e555107d1ab0f66b491",
+          "version": "2.2.2"
+        }
+      },
+      {
+        "package": "Datadog",
+        "repositoryURL": "https://github.com/DataDog/dd-sdk-ios",
+        "state": {
+          "branch": null,
+          "revision": "14630ca5ff6997aa82190f68d349f57f0e2a7222",
+          "version": "1.10.0"
+        }
+      },
+      {
+        "package": "KeychainAccess",
+        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess",
+        "state": {
+          "branch": null,
+          "revision": "84e546727d66f1adc5439debad16270d0fdd04e7",
+          "version": "4.2.2"
+        }
+      },
+      {
+        "package": "MBProgressHUD",
+        "repositoryURL": "https://github.com/jdg/MBProgressHUD",
+        "state": {
+          "branch": null,
+          "revision": "bca42b801100b2b3a4eda0ba8dd33d858c780b0d",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "package": "PLCrashReporter",
+        "repositoryURL": "https://github.com/microsoft/PLCrashReporter.git",
+        "state": {
+          "branch": null,
+          "revision": "6b27393cad517c067dceea85fadf050e70c4ceaa",
+          "version": "1.10.1"
+        }
+      },
+      {
+        "package": "TwilioLivePlayer",
+        "repositoryURL": "https://github.com/twilio/twilio-live-player-ios",
+        "state": {
+          "branch": null,
+          "revision": "97dff98041229cfe90c9d2e5b930c836279a9a48",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "package": "TwilioVideo",
+        "repositoryURL": "https://github.com/twilio/twilio-video-ios",
+        "state": {
+          "branch": null,
+          "revision": "3d852e74c0e9b5357e8a5537405e5c642cc4e0ea",
+          "version": "5.1.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

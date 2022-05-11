@@ -23,10 +23,8 @@ struct ConversationMessage {
 
     let messageType: MessageType
     let toParticipantIdentity: String
-    var options: TCHMessageOptions? {
-        guard let attributes = TCHJsonAttributes(dictionary: dictionary) else { return nil }
-
-        return TCHMessageOptions().withAttributes(attributes, completion: nil)
+    var attributes: TCHJsonAttributes? {
+        TCHJsonAttributes(dictionary: dictionary)
     }
     private let messageTypeKey = "message_type"
     private let toParticipantIdentityKey = "to_participant_identity"

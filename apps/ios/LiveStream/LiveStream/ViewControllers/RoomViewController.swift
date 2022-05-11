@@ -14,8 +14,9 @@
 //  limitations under the License.
 //
 
-import SVProgressHUD
+import MBProgressHUD
 import UIKit
+import SwiftUI
 
 class RoomViewController: UICollectionViewController {
     enum Section: Int, CaseIterable {
@@ -65,7 +66,7 @@ class RoomViewController: UICollectionViewController {
         super.viewDidAppear(animated)
         
         if liveStreamManager.state == .connecting {
-            SVProgressHUD.show()
+            showProgressHUD()
         }
     }
 
@@ -317,17 +318,26 @@ class RoomViewController: UICollectionViewController {
         liveStreamManager.disconnect()
         audioLevelTimer?.invalidate()
     }
+    
+    private func showProgressHUD() {
+        /// Use the navigation controller so all user input is disabled while loading
+        MBProgressHUD.showAdded(to: navigationController!.view, animated: true)
+    }
+    
+    private func hideProgressHUD() {
+        MBProgressHUD.hide(for: navigationController!.view, animated: true)
+    }
 }
 
 extension RoomViewController: LiveStreamDelegate {
     func liveStreamManagerIsConnecting(_ liveStreamManager: LiveStreamManager) {
         guard viewIfLoaded?.window != nil else { return } // View is not visible yet
-        
-        SVProgressHUD.show()
+
+        showProgressHUD()
     }
     
     func liveStreamManager(_ liveStreamManager: LiveStreamManager, didConnectWithError error: Error?) {
-        SVProgressHUD.dismiss()
+        hideProgressHUD()
         configureToolbar()
         applySnapshot(animatingDifferences: true) // Handles inserts, deletes, and moves
 
@@ -347,7 +357,7 @@ extension RoomViewController: LiveStreamDelegate {
     }
 
     func liveStreamManager(_ liveStreamManager: LiveStreamManager, didDisconnectWithError error: Error) {
-        SVProgressHUD.dismiss()
+        hideProgressHUD()
 
         if let error = error as? LiveStreamError, error.isLiveStreamEndedByModeratorError {
             let alert = UIAlertController(

@@ -14,5 +14,4 @@
 //  limitations under the License.
 //
 
-#include "../../Pods/Target Support Files/Pods-LiveStream/Pods-LiveStream.release.xcconfig"
 #include? "../../IOSLiveStreamSecrets/Secrets.xcconfig"

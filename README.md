@@ -60,11 +60,6 @@ If you encounter any deploy errors, try to run `npm run remove` and then `npm ru
 
 1.  Replace `BACKEND_URL` in the [app source](https://github.com/twilio/twilio-live-interactive-audio/blob/task/video-7065-ios-ci-config/apps/ios/LiveStream/LiveStream/API/Core/API.swift) with the public URL from the backend deployment
 
-#### Install Dependencies
-
-1. Install [CocoaPods](https://cocoapods.org)
-1. Run `pod install`
-
 #### Run
 
 1. Run the app
