@@ -14,7 +14,6 @@ apps/ios/fastlane/Preview.html
 apps/ios/fastlane/screenshots/**/*.png
 apps/ios/fastlane/test_output
 apps/ios/fastlane/report.xml
-/apps/ios/Pods/
 IOSLiveStreamSecrets*
 
 # CI

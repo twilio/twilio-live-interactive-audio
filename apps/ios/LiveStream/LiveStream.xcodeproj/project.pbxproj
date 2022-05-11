@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D4E7A791F07C541E2166AFC7 /* Pods_LiveStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36B7E38D4D490F574573D1F /* Pods_LiveStream.framework */; };
 		DC00B355264DB58E002FA907 /* AppCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC00B354264DB58E002FA907 /* AppCenterManager.swift */; };
 		DC13E01126094CFA00825137 /* PlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13E01026094CFA00825137 /* PlayerManager.swift */; };
 		DC3850E32638626C004B9413 /* RemoveSpeakerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3850E22638626C004B9413 /* RemoveSpeakerRequest.swift */; };
@@ -45,6 +44,16 @@
 		DCADF34B27FDEAB70093A9FE /* GeneralSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADF34A27FDEAB70093A9FE /* GeneralSettingsViewModel.swift */; };
 		DCB0724626729BA700FB97BD /* DatadogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB0724526729BA700FB97BD /* DatadogManager.swift */; };
 		DCB0724826729D0A00FB97BD /* PlayerTelemetryLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB0724726729D0A00FB97BD /* PlayerTelemetryLogger.swift */; };
+		DCB3BAAA282C0EF400AF7072 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BAA9282C0EF400AF7072 /* Alamofire */; };
+		DCB3BAB4282C106300AF7072 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BAB3282C106300AF7072 /* AppCenterAnalytics */; };
+		DCB3BAB6282C106300AF7072 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BAB5282C106300AF7072 /* AppCenterCrashes */; };
+		DCB3BAB9282C10CF00AF7072 /* Datadog in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BAB8282C10CF00AF7072 /* Datadog */; };
+		DCB3BABC282C113B00AF7072 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BABB282C113B00AF7072 /* KeychainAccess */; };
+		DCB3BABF282C116C00AF7072 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BABE282C116C00AF7072 /* MBProgressHUD */; };
+		DCB3BAC2282C11C300AF7072 /* TwilioConversationsClient in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BAC1282C11C300AF7072 /* TwilioConversationsClient */; };
+		DCB3BAC5282C120F00AF7072 /* TwilioVideo in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BAC4282C120F00AF7072 /* TwilioVideo */; };
+		DCB3BACB282C143C00AF7072 /* TwilioLivePlayer in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BACA282C143C00AF7072 /* TwilioLivePlayer */; };
+		DCB3BACC282C22ED00AF7072 /* Datadog in Embed Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BAB8282C10CF00AF7072 /* Datadog */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		DCBFBEDB262F77B3007F6424 /* PlayerParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBFBEDA262F77B3007F6424 /* PlayerParticipant.swift */; };
 		DCBFBEDE262F77F1007F6424 /* LiveStreamSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBFBEDD262F77F1007F6424 /* LiveStreamSpeaker.swift */; };
 		DCBFBEE1262F7832007F6424 /* RoomParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBFBEE0262F7832007F6424 /* RoomParticipant.swift */; };
@@ -74,10 +83,21 @@
 		DCF901EF262CB94C00983B3A /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF901EE262CB94C00983B3A /* ToolbarButton.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		DCB3BACD282C22ED00AF7072 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DCB3BACC282C22ED00AF7072 /* Datadog in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		26CEE137B97FFA058E129076 /* Pods-LiveStream.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveStream.debug.xcconfig"; path = "Target Support Files/Pods-LiveStream/Pods-LiveStream.debug.xcconfig"; sourceTree = "<group>"; };
-		3B05B62D1231AF19EAE89017 /* Pods-LiveStream.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveStream.release.xcconfig"; path = "Target Support Files/Pods-LiveStream/Pods-LiveStream.release.xcconfig"; sourceTree = "<group>"; };
-		A36B7E38D4D490F574573D1F /* Pods_LiveStream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LiveStream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC00B354264DB58E002FA907 /* AppCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCenterManager.swift; sourceTree = "<group>"; };
 		DC00B357264DB66D002FA907 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		DC00B358264DC43D002FA907 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -153,31 +173,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4E7A791F07C541E2166AFC7 /* Pods_LiveStream.framework in Frameworks */,
+				DCB3BABF282C116C00AF7072 /* MBProgressHUD in Frameworks */,
+				DCB3BAB4282C106300AF7072 /* AppCenterAnalytics in Frameworks */,
+				DCB3BAC5282C120F00AF7072 /* TwilioVideo in Frameworks */,
+				DCB3BAC2282C11C300AF7072 /* TwilioConversationsClient in Frameworks */,
+				DCB3BACB282C143C00AF7072 /* TwilioLivePlayer in Frameworks */,
+				DCB3BAB6282C106300AF7072 /* AppCenterCrashes in Frameworks */,
+				DCB3BAAA282C0EF400AF7072 /* Alamofire in Frameworks */,
+				DCB3BAB9282C10CF00AF7072 /* Datadog in Frameworks */,
+				DCB3BABC282C113B00AF7072 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1A5613F0717BA0A61386066C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				26CEE137B97FFA058E129076 /* Pods-LiveStream.debug.xcconfig */,
-				3B05B62D1231AF19EAE89017 /* Pods-LiveStream.release.xcconfig */,
-			);
-			name = Pods;
-			path = ../Pods;
-			sourceTree = "<group>";
-		};
-		D162FB05C0EFC12854548B00 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A36B7E38D4D490F574573D1F /* Pods_LiveStream.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		DC00B353264DB576002FA907 /* AppCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,8 +221,6 @@
 			children = (
 				DCA23EDC25F93C580076C4FC /* LiveStream */,
 				DCA23EDB25F93C580076C4FC /* Products */,
-				1A5613F0717BA0A61386066C /* Pods */,
-				D162FB05C0EFC12854548B00 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -534,17 +542,27 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DCA23EEE25F93C5D0076C4FC /* Build configuration list for PBXNativeTarget "LiveStream" */;
 			buildPhases = (
-				A19ED2AF467F5D7CF9EE3B91 /* [CP] Check Pods Manifest.lock */,
 				DCA23ED625F93C580076C4FC /* Sources */,
 				DCA23ED725F93C580076C4FC /* Frameworks */,
 				DCA23ED825F93C580076C4FC /* Resources */,
-				C2CFB4FCF2C722FD8447D759 /* [CP] Embed Pods Frameworks */,
+				DCB3BACD282C22ED00AF7072 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = LiveStream;
+			packageProductDependencies = (
+				DCB3BAA9282C0EF400AF7072 /* Alamofire */,
+				DCB3BAB3282C106300AF7072 /* AppCenterAnalytics */,
+				DCB3BAB5282C106300AF7072 /* AppCenterCrashes */,
+				DCB3BAB8282C10CF00AF7072 /* Datadog */,
+				DCB3BABB282C113B00AF7072 /* KeychainAccess */,
+				DCB3BABE282C116C00AF7072 /* MBProgressHUD */,
+				DCB3BAC1282C11C300AF7072 /* TwilioConversationsClient */,
+				DCB3BAC4282C120F00AF7072 /* TwilioVideo */,
+				DCB3BACA282C143C00AF7072 /* TwilioLivePlayer */,
+			);
 			productName = LiveStream;
 			productReference = DCA23EDA25F93C580076C4FC /* LiveStream.app */;
 			productType = "com.apple.product-type.application";
@@ -572,6 +590,16 @@
 				Base,
 			);
 			mainGroup = DCA23ED125F93C580076C4FC;
+			packageReferences = (
+				DCB3BAA8282C0EF400AF7072 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				DCB3BAB2282C106300AF7072 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
+				DCB3BAB7282C10CF00AF7072 /* XCRemoteSwiftPackageReference "dd-sdk-ios" */,
+				DCB3BABA282C113B00AF7072 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				DCB3BABD282C116C00AF7072 /* XCRemoteSwiftPackageReference "MBProgressHUD" */,
+				DCB3BAC0282C11C300AF7072 /* XCRemoteSwiftPackageReference "conversations-ios" */,
+				DCB3BAC3282C120F00AF7072 /* XCRemoteSwiftPackageReference "twilio-video-ios" */,
+				DCB3BAC9282C143C00AF7072 /* XCRemoteSwiftPackageReference "twilio-live-player-ios" */,
+			);
 			productRefGroup = DCA23EDB25F93C580076C4FC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -596,48 +624,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		A19ED2AF467F5D7CF9EE3B91 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LiveStream-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C2CFB4FCF2C722FD8447D759 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LiveStream/Pods-LiveStream-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LiveStream/Pods-LiveStream-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LiveStream/Pods-LiveStream-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DCA23ED625F93C580076C4FC /* Sources */ = {
@@ -845,7 +831,6 @@
 		};
 		DCA23EEF25F93C5D0076C4FC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 26CEE137B97FFA058E129076 /* Pods-LiveStream.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -937,6 +922,121 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DCB3BAA8282C0EF400AF7072 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		DCB3BAB2282C106300AF7072 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		DCB3BAB7282C10CF00AF7072 /* XCRemoteSwiftPackageReference "dd-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DataDog/dd-sdk-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		DCB3BABA282C113B00AF7072 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		DCB3BABD282C116C00AF7072 /* XCRemoteSwiftPackageReference "MBProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jdg/MBProgressHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		DCB3BAC0282C11C300AF7072 /* XCRemoteSwiftPackageReference "conversations-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twilio/conversations-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		DCB3BAC3282C120F00AF7072 /* XCRemoteSwiftPackageReference "twilio-video-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twilio/twilio-video-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		DCB3BAC9282C143C00AF7072 /* XCRemoteSwiftPackageReference "twilio-live-player-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twilio/twilio-live-player-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DCB3BAA9282C0EF400AF7072 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BAA8282C0EF400AF7072 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		DCB3BAB3282C106300AF7072 /* AppCenterAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BAB2282C106300AF7072 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterAnalytics;
+		};
+		DCB3BAB5282C106300AF7072 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BAB2282C106300AF7072 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		DCB3BAB8282C10CF00AF7072 /* Datadog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BAB7282C10CF00AF7072 /* XCRemoteSwiftPackageReference "dd-sdk-ios" */;
+			productName = Datadog;
+		};
+		DCB3BABB282C113B00AF7072 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BABA282C113B00AF7072 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+		DCB3BABE282C116C00AF7072 /* MBProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BABD282C116C00AF7072 /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
+			productName = MBProgressHUD;
+		};
+		DCB3BAC1282C11C300AF7072 /* TwilioConversationsClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BAC0282C11C300AF7072 /* XCRemoteSwiftPackageReference "conversations-ios" */;
+			productName = TwilioConversationsClient;
+		};
+		DCB3BAC4282C120F00AF7072 /* TwilioVideo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BAC3282C120F00AF7072 /* XCRemoteSwiftPackageReference "twilio-video-ios" */;
+			productName = TwilioVideo;
+		};
+		DCB3BACA282C143C00AF7072 /* TwilioLivePlayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BAC9282C143C00AF7072 /* XCRemoteSwiftPackageReference "twilio-live-player-ios" */;
+			productName = TwilioLivePlayer;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DCA23ED225F93C580076C4FC /* Project object */;
 }
