@@ -8,9 +8,11 @@ const { cli } = require('cli-ux');
   try {
     cli.action.start('removing');
     const services = await client.serverless.services.list();
-    const app = services.find((service) => service.friendlyName.includes("twilio-live-interactive-audio"));
+    const appName = require(__dirname + '/../package.json').name;
+    const app = services.find((service) => service.friendlyName.includes(appName));
     if (app) {
       await client.serverless.services(app.sid).remove();
+      console.log('Removed app: ' + app.domainBase);
     }
     cli.action.stop('done');
   } catch (error) {
