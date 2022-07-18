@@ -54,6 +54,12 @@ If you make any changes to the application, then you can run `npm run deploy` ag
 
 If you encounter any deploy errors, try to run `npm run remove` and then `npm run deploy` again.
 
+#### Max Stream Duration
+
+The app is configured to automatically end a stream after it has been running for 30 minutes. This limitation is in place to limit the [charges applied to your Twilio account](https://www.twilio.com/live/pricing) during early testing.
+
+Max duration is specified when the reference backend creates a `PlayerStreamer` and `MediaProcessor`. To change the max duration, edit [this source code](functions/create-room.js#L48) before deploying the app.
+
 ### Run the iOS app
 
 #### Configure Backend URL
