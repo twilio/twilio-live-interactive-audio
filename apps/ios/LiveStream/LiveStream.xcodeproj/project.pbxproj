@@ -3,16 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D4E7A791F07C541E2166AFC7 /* Pods_LiveStream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36B7E38D4D490F574573D1F /* Pods_LiveStream.framework */; };
 		DC00B355264DB58E002FA907 /* AppCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC00B354264DB58E002FA907 /* AppCenterManager.swift */; };
 		DC13E01126094CFA00825137 /* PlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13E01026094CFA00825137 /* PlayerManager.swift */; };
 		DC3850E32638626C004B9413 /* RemoveSpeakerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3850E22638626C004B9413 /* RemoveSpeakerRequest.swift */; };
 		DC3850E6263862BF004B9413 /* RemoveSpeakerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3850E5263862BF004B9413 /* RemoveSpeakerResponse.swift */; };
-		DC5ABA09260F984000FDCED8 /* SettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5ABA08260F984000FDCED8 /* SettingsDelegate.swift */; };
 		DC5ABA0C260FAD9100FDCED8 /* AppInfoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5ABA0B260FAD9100FDCED8 /* AppInfoStore.swift */; };
 		DC604BE82625F858006BB234 /* ConversationParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC604BE72625F858006BB234 /* ConversationParticipant.swift */; };
 		DC604BEB2625F9F7006BB234 /* LiveStreamRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC604BEA2625F9F7006BB234 /* LiveStreamRole.swift */; };
@@ -34,16 +32,28 @@
 		DCA23F8E25F986D80076C4FC /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23F8D25F986D70076C4FC /* RoundedButton.swift */; };
 		DCA23F9125F9891A0076C4FC /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23F9025F9891A0076C4FC /* FormTextField.swift */; };
 		DCA23F9425F998170076C4FC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23F9325F998170076C4FC /* Colors.swift */; };
-		DCA23FA325FAD3AB0076C4FC /* UIConfigStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23FA225FAD3AB0076C4FC /* UIConfigStore.swift */; };
 		DCA23FC825FC1C1F0076C4FC /* LiveStreamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23FC725FC1C1F0076C4FC /* LiveStreamError.swift */; };
 		DCA23FD325FD23600076C4FC /* PresentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23FD225FD23600076C4FC /* PresentError.swift */; };
-		DCA23FDD25FD35880076C4FC /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23FDC25FD35880076C4FC /* UserDefaultsKeys.swift */; };
 		DCA2400325FFB0E60076C4FC /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23FEB25FFB0E50076C4FC /* RoomManager.swift */; };
 		DCA240382600187E0076C4FC /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA240372600187E0076C4FC /* ReusableView.swift */; };
 		DCA240492601078D0076C4FC /* LiveStreamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA240482601078D0076C4FC /* LiveStreamManager.swift */; };
 		DCACF3A026605D1B005E9248 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACF39F26605D1B005E9248 /* CircleView.swift */; };
+		DCADF34027FCF0CE0093A9FE /* TwilioEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADF33F27FCF0CE0093A9FE /* TwilioEnvironment.swift */; };
+		DCADF34427FDE6460093A9FE /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADF34327FDE6460093A9FE /* GeneralSettingsView.swift */; };
+		DCADF34827FDE6BC0093A9FE /* TitleValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADF34727FDE6BC0093A9FE /* TitleValueView.swift */; };
+		DCADF34B27FDEAB70093A9FE /* GeneralSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADF34A27FDEAB70093A9FE /* GeneralSettingsViewModel.swift */; };
 		DCB0724626729BA700FB97BD /* DatadogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB0724526729BA700FB97BD /* DatadogManager.swift */; };
 		DCB0724826729D0A00FB97BD /* PlayerTelemetryLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB0724726729D0A00FB97BD /* PlayerTelemetryLogger.swift */; };
+		DCB3BAAA282C0EF400AF7072 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BAA9282C0EF400AF7072 /* Alamofire */; };
+		DCB3BAB4282C106300AF7072 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BAB3282C106300AF7072 /* AppCenterAnalytics */; };
+		DCB3BAB6282C106300AF7072 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BAB5282C106300AF7072 /* AppCenterCrashes */; };
+		DCB3BAB9282C10CF00AF7072 /* Datadog in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BAB8282C10CF00AF7072 /* Datadog */; };
+		DCB3BABC282C113B00AF7072 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BABB282C113B00AF7072 /* KeychainAccess */; };
+		DCB3BABF282C116C00AF7072 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BABE282C116C00AF7072 /* MBProgressHUD */; };
+		DCB3BAC2282C11C300AF7072 /* TwilioConversationsClient in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BAC1282C11C300AF7072 /* TwilioConversationsClient */; };
+		DCB3BAC5282C120F00AF7072 /* TwilioVideo in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BAC4282C120F00AF7072 /* TwilioVideo */; };
+		DCB3BACB282C143C00AF7072 /* TwilioLivePlayer in Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BACA282C143C00AF7072 /* TwilioLivePlayer */; };
+		DCB3BACC282C22ED00AF7072 /* Datadog in Embed Frameworks */ = {isa = PBXBuildFile; productRef = DCB3BAB8282C10CF00AF7072 /* Datadog */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		DCBFBEDB262F77B3007F6424 /* PlayerParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBFBEDA262F77B3007F6424 /* PlayerParticipant.swift */; };
 		DCBFBEDE262F77F1007F6424 /* LiveStreamSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBFBEDD262F77F1007F6424 /* LiveStreamSpeaker.swift */; };
 		DCBFBEE1262F7832007F6424 /* RoomParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBFBEE0262F7832007F6424 /* RoomParticipant.swift */; };
@@ -52,8 +62,6 @@
 		DCBFBEFC26306ADB007F6424 /* LiveStreamAudience.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBFBEFB26306ADB007F6424 /* LiveStreamAudience.swift */; };
 		DCBFBF0026307133007F6424 /* LiveStreamUserIdentityComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBFBEFF26307133007F6424 /* LiveStreamUserIdentityComponents.swift */; };
 		DCC6898B268636D2005861A4 /* PlayerMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6898A268636D2005861A4 /* PlayerMetadata.swift */; };
-		DCCDED88260E85C20020A092 /* InAppSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DCCDED87260E85C20020A092 /* InAppSettings.bundle */; };
-		DCCDED8A26113DFE0020A092 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDED8926113DFE0020A092 /* UserDefaultsManager.swift */; };
 		DCCDEDEA261B905A0020A092 /* ConversationMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDEDE3261B90590020A092 /* ConversationMessage.swift */; };
 		DCCDEDEE261B905A0020A092 /* ConversationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDEDE7261B90590020A092 /* ConversationManager.swift */; };
 		DCCDEDF5261BD5E50020A092 /* JoinRoomRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDEDF4261BD5E50020A092 /* JoinRoomRequest.swift */; };
@@ -62,6 +70,8 @@
 		DCCDEDFE261C96AF0020A092 /* GetRoomsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDEDFD261C96AF0020A092 /* GetRoomsResponse.swift */; };
 		DCCDEE01261CA0820020A092 /* DeleteRoomRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDEE00261CA0820020A092 /* DeleteRoomRequest.swift */; };
 		DCCDEE04261CA1020020A092 /* DeleteRoomResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDEE03261CA1020020A092 /* DeleteRoomResponse.swift */; };
+		DCDE1C8F27FF51EA003FBD12 /* AppSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE1C8E27FF51EA003FBD12 /* AppSettingsManager.swift */; };
+		DCDE1C9227FF8769003FBD12 /* EnvironmentBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE1C9127FF8769003FBD12 /* EnvironmentBadge.swift */; };
 		DCEA901F2627B73600969DFF /* LeaveRoomRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEA901E2627B73600969DFF /* LeaveRoomRequest.swift */; };
 		DCEA90222627B7E200969DFF /* LeaveRoomResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEA90212627B7E200969DFF /* LeaveRoomResponse.swift */; };
 		DCF901CB262B68A400983B3A /* ParticipantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF901C9262B68A400983B3A /* ParticipantCell.swift */; };
@@ -73,17 +83,27 @@
 		DCF901EF262CB94C00983B3A /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF901EE262CB94C00983B3A /* ToolbarButton.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		DCB3BACD282C22ED00AF7072 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DCB3BACC282C22ED00AF7072 /* Datadog in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		26CEE137B97FFA058E129076 /* Pods-LiveStream.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveStream.debug.xcconfig"; path = "Target Support Files/Pods-LiveStream/Pods-LiveStream.debug.xcconfig"; sourceTree = "<group>"; };
-		3B05B62D1231AF19EAE89017 /* Pods-LiveStream.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveStream.release.xcconfig"; path = "Target Support Files/Pods-LiveStream/Pods-LiveStream.release.xcconfig"; sourceTree = "<group>"; };
-		A36B7E38D4D490F574573D1F /* Pods_LiveStream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LiveStream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC00B354264DB58E002FA907 /* AppCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCenterManager.swift; sourceTree = "<group>"; };
 		DC00B357264DB66D002FA907 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		DC00B358264DC43D002FA907 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		DC13E01026094CFA00825137 /* PlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerManager.swift; sourceTree = "<group>"; };
 		DC3850E22638626C004B9413 /* RemoveSpeakerRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveSpeakerRequest.swift; sourceTree = "<group>"; };
 		DC3850E5263862BF004B9413 /* RemoveSpeakerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveSpeakerResponse.swift; sourceTree = "<group>"; };
-		DC5ABA08260F984000FDCED8 /* SettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDelegate.swift; sourceTree = "<group>"; };
 		DC5ABA0B260FAD9100FDCED8 /* AppInfoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoStore.swift; sourceTree = "<group>"; };
 		DC604BE72625F858006BB234 /* ConversationParticipant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationParticipant.swift; sourceTree = "<group>"; };
 		DC604BEA2625F9F7006BB234 /* LiveStreamRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamRole.swift; sourceTree = "<group>"; };
@@ -107,14 +127,16 @@
 		DCA23F8D25F986D70076C4FC /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		DCA23F9025F9891A0076C4FC /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		DCA23F9325F998170076C4FC /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		DCA23FA225FAD3AB0076C4FC /* UIConfigStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConfigStore.swift; sourceTree = "<group>"; };
 		DCA23FC725FC1C1F0076C4FC /* LiveStreamError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamError.swift; sourceTree = "<group>"; };
 		DCA23FD225FD23600076C4FC /* PresentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentError.swift; sourceTree = "<group>"; };
-		DCA23FDC25FD35880076C4FC /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		DCA23FEB25FFB0E50076C4FC /* RoomManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomManager.swift; sourceTree = "<group>"; };
 		DCA240372600187E0076C4FC /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		DCA240482601078D0076C4FC /* LiveStreamManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamManager.swift; sourceTree = "<group>"; };
 		DCACF39F26605D1B005E9248 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		DCADF33F27FCF0CE0093A9FE /* TwilioEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwilioEnvironment.swift; sourceTree = "<group>"; };
+		DCADF34327FDE6460093A9FE /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
+		DCADF34727FDE6BC0093A9FE /* TitleValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleValueView.swift; sourceTree = "<group>"; };
+		DCADF34A27FDEAB70093A9FE /* GeneralSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsViewModel.swift; sourceTree = "<group>"; };
 		DCB0724526729BA700FB97BD /* DatadogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatadogManager.swift; sourceTree = "<group>"; };
 		DCB0724726729D0A00FB97BD /* PlayerTelemetryLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTelemetryLogger.swift; sourceTree = "<group>"; };
 		DCBFBEDA262F77B3007F6424 /* PlayerParticipant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerParticipant.swift; sourceTree = "<group>"; };
@@ -125,8 +147,6 @@
 		DCBFBEFB26306ADB007F6424 /* LiveStreamAudience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamAudience.swift; sourceTree = "<group>"; };
 		DCBFBEFF26307133007F6424 /* LiveStreamUserIdentityComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamUserIdentityComponents.swift; sourceTree = "<group>"; };
 		DCC6898A268636D2005861A4 /* PlayerMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerMetadata.swift; sourceTree = "<group>"; };
-		DCCDED87260E85C20020A092 /* InAppSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = InAppSettings.bundle; sourceTree = "<group>"; };
-		DCCDED8926113DFE0020A092 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		DCCDEDE3261B90590020A092 /* ConversationMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationMessage.swift; sourceTree = "<group>"; };
 		DCCDEDE7261B90590020A092 /* ConversationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationManager.swift; sourceTree = "<group>"; };
 		DCCDEDF4261BD5E50020A092 /* JoinRoomRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomRequest.swift; sourceTree = "<group>"; };
@@ -135,6 +155,8 @@
 		DCCDEDFD261C96AF0020A092 /* GetRoomsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRoomsResponse.swift; sourceTree = "<group>"; };
 		DCCDEE00261CA0820020A092 /* DeleteRoomRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRoomRequest.swift; sourceTree = "<group>"; };
 		DCCDEE03261CA1020020A092 /* DeleteRoomResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRoomResponse.swift; sourceTree = "<group>"; };
+		DCDE1C8E27FF51EA003FBD12 /* AppSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsManager.swift; sourceTree = "<group>"; };
+		DCDE1C9127FF8769003FBD12 /* EnvironmentBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentBadge.swift; sourceTree = "<group>"; };
 		DCEA901E2627B73600969DFF /* LeaveRoomRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveRoomRequest.swift; sourceTree = "<group>"; };
 		DCEA90212627B7E200969DFF /* LeaveRoomResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveRoomResponse.swift; sourceTree = "<group>"; };
 		DCF901C9262B68A400983B3A /* ParticipantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantCell.swift; sourceTree = "<group>"; };
@@ -151,31 +173,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4E7A791F07C541E2166AFC7 /* Pods_LiveStream.framework in Frameworks */,
+				DCB3BABF282C116C00AF7072 /* MBProgressHUD in Frameworks */,
+				DCB3BAB4282C106300AF7072 /* AppCenterAnalytics in Frameworks */,
+				DCB3BAC5282C120F00AF7072 /* TwilioVideo in Frameworks */,
+				DCB3BAC2282C11C300AF7072 /* TwilioConversationsClient in Frameworks */,
+				DCB3BACB282C143C00AF7072 /* TwilioLivePlayer in Frameworks */,
+				DCB3BAB6282C106300AF7072 /* AppCenterCrashes in Frameworks */,
+				DCB3BAAA282C0EF400AF7072 /* Alamofire in Frameworks */,
+				DCB3BAB9282C10CF00AF7072 /* Datadog in Frameworks */,
+				DCB3BABC282C113B00AF7072 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1A5613F0717BA0A61386066C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				26CEE137B97FFA058E129076 /* Pods-LiveStream.debug.xcconfig */,
-				3B05B62D1231AF19EAE89017 /* Pods-LiveStream.release.xcconfig */,
-			);
-			name = Pods;
-			path = ../Pods;
-			sourceTree = "<group>";
-		};
-		D162FB05C0EFC12854548B00 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A36B7E38D4D490F574573D1F /* Pods_LiveStream.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		DC00B353264DB576002FA907 /* AppCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,8 +221,6 @@
 			children = (
 				DCA23EDC25F93C580076C4FC /* LiveStream */,
 				DCA23EDB25F93C580076C4FC /* Products */,
-				1A5613F0717BA0A61386066C /* Pods */,
-				D162FB05C0EFC12854548B00 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -230,12 +240,12 @@
 				DC00B356264DB609002FA907 /* IOSLiveStreamSecrets */,
 				DCA23EFB25F96BC40076C4FC /* Launch */,
 				DCA23F0225F975D00076C4FC /* Stores */,
+				DCADF34C27FDF1720093A9FE /* SwiftUI */,
 				DCA23FE225FFB0E50076C4FC /* Twilio */,
 				DCA23F8C25F986C30076C4FC /* Views */,
 				DCA23EFD25F96BCF0076C4FC /* ViewControllers */,
 				DCA23EFF25F96BDE0076C4FC /* Storyboards */,
 				DCA23EE625F93C5D0076C4FC /* Assets.xcassets */,
-				DCCDED87260E85C20020A092 /* InAppSettings.bundle */,
 				DCA23EEB25F93C5D0076C4FC /* Info.plist */,
 				DC00B358264DC43D002FA907 /* Release.xcconfig */,
 			);
@@ -256,7 +266,6 @@
 			children = (
 				DCA23EE125F93C580076C4FC /* RoomListViewController.swift */,
 				DCA23EF425F9433F0076C4FC /* RoomViewController.swift */,
-				DC5ABA08260F984000FDCED8 /* SettingsDelegate.swift */,
 				DCA23EF725F9435D0076C4FC /* SignInViewController.swift */,
 			);
 			path = ViewControllers;
@@ -276,10 +285,10 @@
 			children = (
 				DC00B353264DB576002FA907 /* AppCenter */,
 				DCCDED94261141210020A092 /* AppInfo */,
+				DCDE1C8D27FF51D4003FBD12 /* AppSettings */,
 				DCA23F0325F975F00076C4FC /* Auth */,
 				DCB0724426729B9500FB97BD /* Datadog */,
 				DCA23F1725F976650076C4FC /* Keychain */,
-				DCA23FA525FBD8B30076C4FC /* UIConfig */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -352,8 +361,6 @@
 				DCA23FC725FC1C1F0076C4FC /* LiveStreamError.swift */,
 				DCA23FD225FD23600076C4FC /* PresentError.swift */,
 				DCA240372600187E0076C4FC /* ReusableView.swift */,
-				DCA23FDC25FD35880076C4FC /* UserDefaultsKeys.swift */,
-				DCCDED8926113DFE0020A092 /* UserDefaultsManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -363,6 +370,7 @@
 			children = (
 				DCF901E4262C9D7E00983B3A /* AudienceHeaderView */,
 				DCACF39E26605CB7005E9248 /* CircleView */,
+				DCDE1C9027FF873D003FBD12 /* EnvironmentBadge */,
 				DCF901DD262C9D3400983B3A /* FormTextField */,
 				DCF901DF262C9D4700983B3A /* ParticipantCell */,
 				DCF901E8262C9DA200983B3A /* RoundedButton */,
@@ -370,14 +378,6 @@
 				DCF901F1262CB95100983B3A /* ToolbarButton */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		DCA23FA525FBD8B30076C4FC /* UIConfig */ = {
-			isa = PBXGroup;
-			children = (
-				DCA23FA225FAD3AB0076C4FC /* UIConfigStore.swift */,
-			);
-			path = UIConfig;
 			sourceTree = "<group>";
 		};
 		DCA23FE225FFB0E50076C4FC /* Twilio */ = {
@@ -423,6 +423,24 @@
 			path = CircleView;
 			sourceTree = "<group>";
 		};
+		DCADF34927FDE6D70093A9FE /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DCADF34327FDE6460093A9FE /* GeneralSettingsView.swift */,
+				DCADF34A27FDEAB70093A9FE /* GeneralSettingsViewModel.swift */,
+				DCADF34727FDE6BC0093A9FE /* TitleValueView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		DCADF34C27FDF1720093A9FE /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				DCADF34927FDE6D70093A9FE /* Settings */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		DCB0724426729B9500FB97BD /* Datadog */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,6 +465,23 @@
 				DC604BE72625F858006BB234 /* ConversationParticipant.swift */,
 			);
 			path = Conversation;
+			sourceTree = "<group>";
+		};
+		DCDE1C8D27FF51D4003FBD12 /* AppSettings */ = {
+			isa = PBXGroup;
+			children = (
+				DCDE1C8E27FF51EA003FBD12 /* AppSettingsManager.swift */,
+				DCADF33F27FCF0CE0093A9FE /* TwilioEnvironment.swift */,
+			);
+			path = AppSettings;
+			sourceTree = "<group>";
+		};
+		DCDE1C9027FF873D003FBD12 /* EnvironmentBadge */ = {
+			isa = PBXGroup;
+			children = (
+				DCDE1C9127FF8769003FBD12 /* EnvironmentBadge.swift */,
+			);
+			path = EnvironmentBadge;
 			sourceTree = "<group>";
 		};
 		DCF901DD262C9D3400983B3A /* FormTextField */ = {
@@ -507,17 +542,27 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DCA23EEE25F93C5D0076C4FC /* Build configuration list for PBXNativeTarget "LiveStream" */;
 			buildPhases = (
-				A19ED2AF467F5D7CF9EE3B91 /* [CP] Check Pods Manifest.lock */,
 				DCA23ED625F93C580076C4FC /* Sources */,
 				DCA23ED725F93C580076C4FC /* Frameworks */,
 				DCA23ED825F93C580076C4FC /* Resources */,
-				C2CFB4FCF2C722FD8447D759 /* [CP] Embed Pods Frameworks */,
+				DCB3BACD282C22ED00AF7072 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = LiveStream;
+			packageProductDependencies = (
+				DCB3BAA9282C0EF400AF7072 /* Alamofire */,
+				DCB3BAB3282C106300AF7072 /* AppCenterAnalytics */,
+				DCB3BAB5282C106300AF7072 /* AppCenterCrashes */,
+				DCB3BAB8282C10CF00AF7072 /* Datadog */,
+				DCB3BABB282C113B00AF7072 /* KeychainAccess */,
+				DCB3BABE282C116C00AF7072 /* MBProgressHUD */,
+				DCB3BAC1282C11C300AF7072 /* TwilioConversationsClient */,
+				DCB3BAC4282C120F00AF7072 /* TwilioVideo */,
+				DCB3BACA282C143C00AF7072 /* TwilioLivePlayer */,
+			);
 			productName = LiveStream;
 			productReference = DCA23EDA25F93C580076C4FC /* LiveStream.app */;
 			productType = "com.apple.product-type.application";
@@ -545,6 +590,16 @@
 				Base,
 			);
 			mainGroup = DCA23ED125F93C580076C4FC;
+			packageReferences = (
+				DCB3BAA8282C0EF400AF7072 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				DCB3BAB2282C106300AF7072 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
+				DCB3BAB7282C10CF00AF7072 /* XCRemoteSwiftPackageReference "dd-sdk-ios" */,
+				DCB3BABA282C113B00AF7072 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				DCB3BABD282C116C00AF7072 /* XCRemoteSwiftPackageReference "MBProgressHUD" */,
+				DCB3BAC0282C11C300AF7072 /* XCRemoteSwiftPackageReference "conversations-ios" */,
+				DCB3BAC3282C120F00AF7072 /* XCRemoteSwiftPackageReference "twilio-video-ios" */,
+				DCB3BAC9282C143C00AF7072 /* XCRemoteSwiftPackageReference "twilio-live-player-ios" */,
+			);
 			productRefGroup = DCA23EDB25F93C580076C4FC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -559,7 +614,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCCDED88260E85C20020A092 /* InAppSettings.bundle in Resources */,
 				DCF901D2262B7D1E00983B3A /* SpeakersHeaderView.xib in Resources */,
 				DCA23EEA25F93C5D0076C4FC /* LaunchScreen.storyboard in Resources */,
 				DCA23EE725F93C5D0076C4FC /* Assets.xcassets in Resources */,
@@ -571,48 +625,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		A19ED2AF467F5D7CF9EE3B91 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LiveStream-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C2CFB4FCF2C722FD8447D759 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LiveStream/Pods-LiveStream-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LiveStream/Pods-LiveStream-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LiveStream/Pods-LiveStream-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		DCA23ED625F93C580076C4FC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -623,6 +635,7 @@
 				DCF901D1262B7D1E00983B3A /* SpeakersHeaderView.swift in Sources */,
 				DCA23FC825FC1C1F0076C4FC /* LiveStreamError.swift in Sources */,
 				DCACF3A026605D1B005E9248 /* CircleView.swift in Sources */,
+				DCADF34827FDE6BC0093A9FE /* TitleValueView.swift in Sources */,
 				DC604BE82625F858006BB234 /* ConversationParticipant.swift in Sources */,
 				DC3850E32638626C004B9413 /* RemoveSpeakerRequest.swift in Sources */,
 				DCF901D6262B7EC000983B3A /* AudienceHeaderView.swift in Sources */,
@@ -632,7 +645,9 @@
 				DCBFBEF826306A41007F6424 /* LiveStreamSpeakerSource.swift in Sources */,
 				DC13E01126094CFA00825137 /* PlayerManager.swift in Sources */,
 				DCA23F5D25F977230076C4FC /* APIRequest.swift in Sources */,
+				DCADF34427FDE6460093A9FE /* GeneralSettingsView.swift in Sources */,
 				DC5ABA0C260FAD9100FDCED8 /* AppInfoStore.swift in Sources */,
+				DCDE1C9227FF8769003FBD12 /* EnvironmentBadge.swift in Sources */,
 				DCA23F8E25F986D80076C4FC /* RoundedButton.swift in Sources */,
 				DCB0724826729D0A00FB97BD /* PlayerTelemetryLogger.swift in Sources */,
 				DCF901EF262CB94C00983B3A /* ToolbarButton.swift in Sources */,
@@ -644,23 +659,22 @@
 				DCA2400325FFB0E60076C4FC /* RoomManager.swift in Sources */,
 				DCA23EE225F93C580076C4FC /* RoomListViewController.swift in Sources */,
 				DCCDEDEE261B905A0020A092 /* ConversationManager.swift in Sources */,
-				DCCDED8A26113DFE0020A092 /* UserDefaultsManager.swift in Sources */,
 				DCBFBEDE262F77F1007F6424 /* LiveStreamSpeaker.swift in Sources */,
 				DCEA901F2627B73600969DFF /* LeaveRoomRequest.swift in Sources */,
 				DCC6898B268636D2005861A4 /* PlayerMetadata.swift in Sources */,
 				DCA240492601078D0076C4FC /* LiveStreamManager.swift in Sources */,
 				DCA23F1A25F976650076C4FC /* KeychainStorage.swift in Sources */,
-				DCA23FDD25FD35880076C4FC /* UserDefaultsKeys.swift in Sources */,
 				DCA23EDE25F93C580076C4FC /* AppDelegate.swift in Sources */,
-				DCA23FA325FAD3AB0076C4FC /* UIConfigStore.swift in Sources */,
+				DCADF34027FCF0CE0093A9FE /* TwilioEnvironment.swift in Sources */,
 				DCBFBEFC26306ADB007F6424 /* LiveStreamAudience.swift in Sources */,
 				DCCDEDFE261C96AF0020A092 /* GetRoomsResponse.swift in Sources */,
 				DCEA90222627B7E200969DFF /* LeaveRoomResponse.swift in Sources */,
+				DCDE1C8F27FF51EA003FBD12 /* AppSettingsManager.swift in Sources */,
 				DCA23FD325FD23600076C4FC /* PresentError.swift in Sources */,
 				DC604BEB2625F9F7006BB234 /* LiveStreamRole.swift in Sources */,
+				DCADF34B27FDEAB70093A9FE /* GeneralSettingsViewModel.swift in Sources */,
 				DCA23F9125F9891A0076C4FC /* FormTextField.swift in Sources */,
 				DCCDEDF8261BD6C30020A092 /* JoinRoomResponse.swift in Sources */,
-				DC5ABA09260F984000FDCED8 /* SettingsDelegate.swift in Sources */,
 				DCF901CB262B68A400983B3A /* ParticipantCell.swift in Sources */,
 				DCCDEE01261CA0820020A092 /* DeleteRoomRequest.swift in Sources */,
 				DCCDEE04261CA1020020A092 /* DeleteRoomResponse.swift in Sources */,
@@ -750,7 +764,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -805,7 +819,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -817,25 +831,17 @@
 		};
 		DCA23EEF25F93C5D0076C4FC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 26CEE137B97FFA058E129076 /* Pods-LiveStream.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = SX5J6BN2KX;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainAccess\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SVProgressHUD\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyUserDefaults\"",
-					"\"${PODS_ROOT}/TwilioVideo\"",
-					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/TwilioVideo\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = LiveStream/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -843,6 +849,7 @@
 				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twilio.LiveStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.twilio.LiveStream";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -854,23 +861,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = SX5J6BN2KX;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/KeychainAccess\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SVProgressHUD\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyUserDefaults\"",
-					"\"${PODS_ROOT}/AmazonIVSPlayer\"",
-					"\"${PODS_ROOT}/TwilioVideo\"",
-					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/AmazonIVSPlayer\"",
-					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/TwilioVideo\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = LiveStream/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -878,6 +876,7 @@
 				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.twilio.LiveStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.twilio.LiveStream";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -905,6 +904,121 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DCB3BAA8282C0EF400AF7072 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		DCB3BAB2282C106300AF7072 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		DCB3BAB7282C10CF00AF7072 /* XCRemoteSwiftPackageReference "dd-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DataDog/dd-sdk-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		DCB3BABA282C113B00AF7072 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		DCB3BABD282C116C00AF7072 /* XCRemoteSwiftPackageReference "MBProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jdg/MBProgressHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		DCB3BAC0282C11C300AF7072 /* XCRemoteSwiftPackageReference "conversations-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twilio/conversations-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		DCB3BAC3282C120F00AF7072 /* XCRemoteSwiftPackageReference "twilio-video-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twilio/twilio-video-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		DCB3BAC9282C143C00AF7072 /* XCRemoteSwiftPackageReference "twilio-live-player-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twilio/twilio-live-player-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DCB3BAA9282C0EF400AF7072 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BAA8282C0EF400AF7072 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		DCB3BAB3282C106300AF7072 /* AppCenterAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BAB2282C106300AF7072 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterAnalytics;
+		};
+		DCB3BAB5282C106300AF7072 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BAB2282C106300AF7072 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		DCB3BAB8282C10CF00AF7072 /* Datadog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BAB7282C10CF00AF7072 /* XCRemoteSwiftPackageReference "dd-sdk-ios" */;
+			productName = Datadog;
+		};
+		DCB3BABB282C113B00AF7072 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BABA282C113B00AF7072 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+		DCB3BABE282C116C00AF7072 /* MBProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BABD282C116C00AF7072 /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
+			productName = MBProgressHUD;
+		};
+		DCB3BAC1282C11C300AF7072 /* TwilioConversationsClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BAC0282C11C300AF7072 /* XCRemoteSwiftPackageReference "conversations-ios" */;
+			productName = TwilioConversationsClient;
+		};
+		DCB3BAC4282C120F00AF7072 /* TwilioVideo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BAC3282C120F00AF7072 /* XCRemoteSwiftPackageReference "twilio-video-ios" */;
+			productName = TwilioVideo;
+		};
+		DCB3BACA282C143C00AF7072 /* TwilioLivePlayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCB3BAC9282C143C00AF7072 /* XCRemoteSwiftPackageReference "twilio-live-player-ios" */;
+			productName = TwilioLivePlayer;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DCA23ED225F93C580076C4FC /* Project object */;
 }

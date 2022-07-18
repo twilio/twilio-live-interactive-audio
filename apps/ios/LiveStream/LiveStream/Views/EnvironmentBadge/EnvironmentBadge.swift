@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2021 Twilio, Inc.
+//  Copyright (C) 2022 Twilio, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -14,12 +14,24 @@
 //  limitations under the License.
 //
 
-import SVProgressHUD
 import UIKit
 
-class UIConfigStore {
-    func start() {
-        SVProgressHUD.setForegroundColor(UIColor(hex: 0x0263E0))
-        SVProgressHUD.setDefaultMaskType(.clear)
+class EnvironmentBadge: UILabel {
+    convenience init(environment: TwilioEnvironment) {
+        self.init()
+        text = " " + environment.rawValue.uppercased() + " "
+        font = .boldSystemFont(ofSize: 18)
+        textColor = .white
+        backgroundColor = environment.backgroundColor
+    }
+}
+
+private extension TwilioEnvironment {
+    var backgroundColor: UIColor {
+        switch self {
+        case .prod: return .red
+        case .stage: return .orange
+        case .dev: return .green
+        }
     }
 }

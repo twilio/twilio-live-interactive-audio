@@ -14,22 +14,21 @@
 //  limitations under the License.
 //
 
-import InAppSettingsKit
+import Combine
 import UIKit
+import SwiftUI
 
 class RoomListViewController: UITableViewController {
     private let authStore = AuthStore.shared
-    private let settingsDelegate = SettingsDelegate()
-    private let userDefaultsManager = UserDefaultsManager()
+    private let settingsViewModel = GeneralSettingsViewModel()
     private let api = API.shared
     private var rooms: [String] = []
     private var roomName: String?
-    
+    private var subscriptions = Set<AnyCancellable>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        settingsDelegate.presentingViewController = self
-
         tableView.tableFooterView = UIView() // Remove empty cells
 
         refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
@@ -40,6 +39,25 @@ class RoomListViewController: UITableViewController {
         
         if authStore.isSignedIn {
             refresh()
+        }
+        
+        settingsViewModel.$signOut
+            .filter { $0 }
+            .sink { [weak self] _ in
+                self?.dismiss(animated: true) {
+                    self?.performSegue(withIdentifier: "SignOut", sender: self)
+                }
+            }
+            .store(in: &subscriptions)
+
+        let environment = api.environment
+        
+        switch environment {
+        case .stage, .dev:
+            let environmentBadge = EnvironmentBadge(environment: environment)
+            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: environmentBadge)
+        case .prod:
+            break
         }
     }
     
@@ -67,11 +85,6 @@ class RoomListViewController: UITableViewController {
                 roomViewController.liveStreamManager = LiveStreamManager(roomName: roomName, shouldCreateRoom: false)
                 tableView.deselectRow(at: selectedRow, animated: true)
             }
-        case "Settings":
-            let navigationController = segue.destination as! UINavigationController
-            let settingsViewController = navigationController.viewControllers.first as! IASKAppSettingsViewController
-            settingsViewController.delegate = settingsDelegate
-            userDefaultsManager.sync()
         default:
             break
         }
@@ -89,6 +102,13 @@ class RoomListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "Room", sender: self)
+    }
+    
+    @IBAction func settingsTap(_ sender: Any) {
+        let settingsView = GeneralSettingsView()
+            .environmentObject(settingsViewModel)
+        let settingsController = UIHostingController(rootView: settingsView)
+        present(settingsController, animated: true, completion: nil)
     }
     
     @objc private func handleCreateRoomTap() {

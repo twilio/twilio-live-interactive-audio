@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2021 Twilio, Inc.
+//  Copyright (C) 2022 Twilio, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -14,4 +14,14 @@
 //  limitations under the License.
 //
 
-#include? "../../IOSLiveStreamSecrets/Secrets.xcconfig"
+import SwiftUI
+
+class AppSettingsManager: ObservableObject {
+    static let shared = AppSettingsManager()
+
+    @AppStorage("UserIdentity") var userIdentity: String = ""
+    
+    func reset() {
+        userIdentity = ""
+    }
+}

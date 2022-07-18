@@ -19,10 +19,21 @@ import Foundation
 
 class API {
     static var shared = API()
+    
+    var environment: TwilioEnvironment {
+        if url.hasSuffix("dev.stage.twil.io") {
+            return .stage
+        } else if url.hasSuffix("dev.dev.twil.io") {
+            return .dev
+        } else {
+            return .prod
+        }
+    }
+    
     private let session = Session()
     private let jsonEncoder = JSONEncoder()
     private let jsonDecoder = JSONDecoder()
-    private let url = <#BACKEND_URL#>
+    private let url: String = <#BACKEND_URL#>
 
     init() {
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase

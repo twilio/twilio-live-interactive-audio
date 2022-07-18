@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2021 Twilio, Inc.
+//  Copyright (C) 2022 Twilio, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -14,4 +14,30 @@
 //  limitations under the License.
 //
 
-#include? "../../IOSLiveStreamSecrets/Secrets.xcconfig"
+import Foundation
+
+enum TwilioEnvironment: String, CaseIterable, Identifiable {
+    case prod
+    case stage
+    case dev
+
+    var id: Self {
+        self
+    }
+    
+    var videoEnvironment: String {
+        switch self {
+        case .prod: return "Production"
+        case .stage: return "Staging"
+        case .dev: return "Development"
+        }
+    }
+    
+    var region: String? {
+        switch self {
+        case .prod: return nil
+        case .stage: return "stage-us1"
+        case .dev: return "dev-us1"
+        }
+    }
+}

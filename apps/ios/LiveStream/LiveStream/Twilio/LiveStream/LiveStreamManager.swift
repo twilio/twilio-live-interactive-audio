@@ -14,6 +14,8 @@
 //  limitations under the License.
 //
 
+import Foundation
+
 protocol LiveStreamDelegate: AnyObject {
     func liveStreamManagerIsConnecting(_ liveStreamManager: LiveStreamManager)
     func liveStreamManager(_ liveStreamManager: LiveStreamManager, didConnectWithError error: Error?)
@@ -61,6 +63,10 @@ class LiveStreamManager {
         guard state == .disconnected else { fatalError("Live stream connection already in progress.") }
         
         state = .connecting
+        
+        /// Set environment variable used by `TwilioVideo` and `TwilioLivePlayer`. This is only used by Twilio employees for internal testing.
+        setenv("TWILIO_ENVIRONMENT", api.environment.videoEnvironment, 1)
+        
         delegate?.liveStreamManagerIsConnecting(self)
 
         let request = JoinRoomRequest(

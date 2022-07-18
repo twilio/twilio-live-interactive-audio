@@ -43,9 +43,15 @@ class ConversationManager: NSObject {
         self.userIdentity = userIdentity
         self.conversationSID = conversationSID
 
+        let properties = TwilioConversationsClientProperties()
+        
+        if let region = API.shared.environment.region {
+            properties.region = region /// Only used by Twilio employees for internal testing
+        }
+
         TwilioConversationsClient.conversationsClient(
             withToken: accessToken,
-            properties: nil,
+            properties: properties,
             delegate: self
         ) { [weak self] result, client in
             guard let client = client else { self?.handleError(result.error!); return }
@@ -65,9 +71,9 @@ class ConversationManager: NSObject {
     }
         
     func sendMessage(message: ConversationMessage) {
-        guard let options = message.options else { return }
-        
-        conversation?.sendMessage(with: options, completion: nil)
+        guard let attributes = message.attributes else { return }
+
+        conversation?.prepareMessage().setAttributes(attributes, error: nil).buildAndSend(completion: nil)
     }
     
     private func getConversation() {

@@ -52,6 +52,8 @@ Backend URL: https://twilio-live-interactive-audio-7873-dev.twil.io
 
 If you make any changes to the application, then you can run `npm run deploy` again and subsequent deploys will override your existing app.
 
+If you encounter any deploy errors, try to run `npm run remove` and then `npm run deploy` again.
+
 #### Max Stream Duration
 
 The app is configured to automatically end a stream after it has been running for 30 minutes. This limitation is in place to limit the [charges applied to your Twilio account](https://www.twilio.com/live/pricing) during early testing.
@@ -63,11 +65,6 @@ Max duration is specified when the reference backend creates a `PlayerStreamer` 
 #### Configure Backend URL
 
 1.  Replace `BACKEND_URL` in the [app source](https://github.com/twilio/twilio-live-interactive-audio/blob/task/video-7065-ios-ci-config/apps/ios/LiveStream/LiveStream/API/Core/API.swift) with the public URL from the backend deployment
-
-#### Install Dependencies
-
-1. Install [CocoaPods](https://cocoapods.org)
-1. Run `pod install`
 
 #### Run
 
