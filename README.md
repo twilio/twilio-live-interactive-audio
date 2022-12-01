@@ -1,4 +1,7 @@
 # Twilio Live Interactive Audio
+:warning: We are no longer allowing new customers to onboard to Twilio Live. Effective November 30, 2023, Twilio Live will End of Life. If you are an existing Live customers, we have created this [Migration Guide](https://support.twilio.com/hc/en-us/articles/10623861544987-Twilio-Live-Migration-Guide) to help you identify an alternative solution for your use case.
+
+## What is it
 
 This project demonstrates an interactive live audio streaming app that uses [Twilio Live](https://www.twilio.com/docs/live) and [Twilio Video](https://www.twilio.com/docs/video). The project is setup as a monorepo that contains the frontend reference applications for iOS. 
 
