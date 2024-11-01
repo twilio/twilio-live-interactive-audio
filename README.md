@@ -1,3 +1,6 @@
+> [!WARNING]
+> The Twilio Live API is end of life (EOL) and is no longer available to customers. See this [page](https://www.twilio.com/en-us/changelog/twilio-live-end-of-life) for details.
+
 # Twilio Live Interactive Audio
 
 This project demonstrates an interactive live audio streaming app that uses [Twilio Live](https://www.twilio.com/docs/live) and [Twilio Video](https://www.twilio.com/docs/video). The project is setup as a monorepo that contains the frontend reference applications for iOS. 
