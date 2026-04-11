@@ -13,13 +13,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.3",
-    "twilio": "^3.59.0"
+    "axios": "^1.15.0",
+    "twilio": "^4.19.3"
   },
   "devDependencies": {
     "cli-ux": "^5.6.3",
     "dotenv": "^10.0.0",
     "fs-extra": "^10.0.0",
-    "twilio-run": "^3.2.2"
+    "twilio-run": "^4.0.0"
   }
 }
