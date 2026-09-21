@@ -1,0 +1,76 @@
+name: Pull Darwin tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: "rtc-cpp project"
+        type: choice
+        options: [voice, video]
+        default: voice
+      sha:
+        description: "Short SHA of the rtc-cpp build (leave empty for latest)"
+        required: false
+        default: ""
+  repository_dispatch:
+    # Fired by rtc-cpp Buildkite after all linux+darwin builds land in S3.
+    # Payload: { "project": "voice"|"video", "sha": "<short-sha>" }
+    types: [rtc-cpp-tests-ready]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  pull:
+    runs-on: macos-latest
+    env:
+      BUCKET: cpp-test-artifacts
+      PLATFORM: darwin
+      ARCH: arm64
+    steps:
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::897837310411:role/twilio-live-interactive-audio-github-role
+          aws-region: us-east-1
+
+      - name: Verify assumed role
+        run: aws sts get-caller-identity
+
+      - name: Download and untar debug + release
+        env:
+          # Prefer repository_dispatch payload; fall back to workflow_dispatch inputs.
+          PROJECT: ${{ github.event.client_payload.project || inputs.project || 'voice' }}
+          SHA: ${{ github.event.client_payload.sha || inputs.sha || '' }}
+        run: |
+          set -euo pipefail
+          mkdir -p tests
+          cd tests
+
+          resolve_key() {
+            local bt="$1"
+            if [ -n "$SHA" ]; then
+              printf '%s' "${PROJECT}-${PLATFORM}-${ARCH}-${bt}-${SHA}.tar.gz"
+            else
+              aws s3api list-objects-v2 \
+                --bucket "$BUCKET" \
+                --prefix "${PROJECT}-${PLATFORM}-${ARCH}-${bt}-" \
+                --query 'sort_by(Contents, &LastModified)[-1].Key' \
+                --output text
+            fi
+          }
+
+          for bt in debug release; do
+            KEY="$(resolve_key "$bt")"
+            if [ -z "$KEY" ] || [ "$KEY" = "None" ]; then
+              echo "::error::no tarball found in s3://${BUCKET}/ matching ${PROJECT}-${PLATFORM}-${ARCH}-${bt}-*"
+              exit 1
+            fi
+            echo "--- $bt : s3://${BUCKET}/${KEY}"
+            aws s3 cp "s3://${BUCKET}/${KEY}" .
+            mkdir -p "$bt"
+            tar -xzf "$(basename "$KEY")" -C "$bt"
+            rm -f "$(basename "$KEY")"
+            echo "extracted to tests/$bt:"
+            find "$bt" -maxdepth 3 -type f
+          done
