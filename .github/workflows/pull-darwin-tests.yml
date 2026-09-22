@@ -1,0 +1,115 @@
+name: Pull Darwin tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: "rtc-cpp project"
+        type: choice
+        options: [voice, video]
+        default: voice
+      sha:
+        description: "Short SHA of the rtc-cpp build (leave empty for latest)"
+        required: false
+        default: ""
+  repository_dispatch:
+    # Fired by rtc-cpp Buildkite after all linux+darwin builds land in S3.
+    # Payload: { "project": "voice"|"video", "sha": "<short-sha>" }
+    types: [rtc-cpp-tests-ready]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  pull:
+    runs-on: macos-latest
+    env:
+      BUCKET: cpp-test-artifacts
+      PLATFORM: darwin
+      ARCH: arm64
+    steps:
+      - uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
+        with:
+          # Set the AWS_ROLE_ARN Actions Variable in repo settings. Actions
+          # Variables require repo write access to read via the API, so this
+          # keeps the ARN out of the workflow file (public repo hygiene).
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - name: Resolve inputs
+        id: resolve
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PAYLOAD_PROJECT: ${{ github.event.client_payload.project }}
+          PAYLOAD_SHA: ${{ github.event.client_payload.sha }}
+          INPUT_PROJECT: ${{ inputs.project }}
+          INPUT_SHA: ${{ inputs.sha }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
+            # Dispatched by rtc-cpp — the contract requires an explicit project.
+            # A silent 'voice' fallback here would mask a wrong-key dispatch and
+            # let the run go green against artifacts it wasn't meant to pull.
+            if [ -z "${PAYLOAD_PROJECT:-}" ]; then
+              echo "::error::repository_dispatch payload is missing 'project' (got: '${PAYLOAD_PROJECT:-}'). Refusing to fall back to a default."
+              exit 1
+            fi
+            PROJECT="$PAYLOAD_PROJECT"
+            SHA="${PAYLOAD_SHA:-}"
+          else
+            PROJECT="${INPUT_PROJECT:-voice}"
+            SHA="${INPUT_SHA:-}"
+          fi
+          case "$PROJECT" in
+            voice|video) ;;
+            *) echo "::error::invalid project '$PROJECT'"; exit 1 ;;
+          esac
+          echo "project=$PROJECT" >> "$GITHUB_OUTPUT"
+          echo "sha=$SHA"         >> "$GITHUB_OUTPUT"
+          echo "Resolved: project=$PROJECT sha='${SHA:-<latest>}'"
+
+      - name: Download and untar debug + release
+        env:
+          PROJECT: ${{ steps.resolve.outputs.project }}
+          SHA:     ${{ steps.resolve.outputs.sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p tests
+          cd tests
+
+          # Resolve SHA once from the newest object across BOTH build_type prefixes,
+          # so debug and release can't drift to different commits (which would
+          # happen if we picked latest independently per prefix and one build_type
+          # from a newer commit landed while the other hadn't yet).
+          if [ -z "$SHA" ]; then
+            # `Contents || `[]`` guards the empty-prefix case: list-objects-v2
+            # omits Contents entirely when nothing matches, and sort_by(null,...)
+            # returns error 255 rather than an empty list — that would bypass the
+            # "no tarball found" branch below under `set -e`.
+            LATEST_KEY="$(aws s3api list-objects-v2 \
+              --bucket "$BUCKET" \
+              --prefix "${PROJECT}-${PLATFORM}-${ARCH}-" \
+              --query 'sort_by(Contents || `[]`, &LastModified)[-1].Key' \
+              --output text)"
+            if [ -z "$LATEST_KEY" ] || [ "$LATEST_KEY" = "None" ]; then
+              echo "::error::no tarballs found in s3://${BUCKET}/ matching ${PROJECT}-${PLATFORM}-${ARCH}-*"
+              exit 1
+            fi
+            # Key shape: <project>-<platform>-<arch>-<build_type>-<sha>.tar.gz
+            # The known components contain no dashes, so `awk -F- '{print $NF}'`
+            # on the basename minus .tar.gz gives the short SHA.
+            SHA="$(basename "$LATEST_KEY" .tar.gz | awk -F- '{print $NF}')"
+            echo "Resolved latest SHA=$SHA from $LATEST_KEY"
+          fi
+
+          for bt in debug release; do
+            KEY="${PROJECT}-${PLATFORM}-${ARCH}-${bt}-${SHA}.tar.gz"
+            echo "--- $bt : s3://${BUCKET}/${KEY}"
+            aws s3 cp "s3://${BUCKET}/${KEY}" .
+            mkdir -p "$bt"
+            tar -xzf "$(basename "$KEY")" -C "$bt"
+            rm -f "$(basename "$KEY")"
+            echo "extracted to tests/$bt:"
+            find "$bt" -maxdepth 3 -type f
+          done

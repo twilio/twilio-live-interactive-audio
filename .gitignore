@@ -22,3 +22,13 @@ IOSLiveStreamSecrets*
 /AppleWWDRCAG3.cer
 /Certificates.p12
 /vendor/
+
+infra/.terraform/
+infra/terraform.tfstate
+infra/terraform.tfstate.backup
+infra/terraform.tfstate.d/
+infra/tfplan
+infra/*.tfvars
+infra/*.tfvars.json
+infra/crash.log
+infra/crash.*.log
