@@ -18,10 +18,15 @@ locals {
   github_repo = "twilio/twilio-live-interactive-audio"
   test_bucket = "cpp-test-artifacts"
 
-  # Only workflow runs on a branch (any branch) in this repo can assume the role.
-  # Excludes tags, environments, and pull_request events. Forks cannot get an
-  # OIDC token from GitHub at all, so the trust boundary is "anyone with write
-  # access to the repo" — same as a private repo.
+  # The `refs/heads/*` sub pattern below is the SOLE control excluding fork PRs
+  # from assuming this role. Fork PRs DO get an OIDC token from GitHub — the
+  # exclusion works because their `sub` claim is `repo:<owner>/<repo>:pull_request`
+  # (not `ref:refs/heads/...`), which does not match this pattern.
+  #
+  # DO NOT widen this to `repo:${local.github_repo}:*` without a security review.
+  # On a public repo, a `:*` wildcard would grant this role to any fork PR run.
+  # Any expansion (tags, environments, workflow_ref) must be added as explicit,
+  # narrowly-scoped alternatives — never as a wildcard.
   oidc_sub_pattern = "repo:${local.github_repo}:ref:refs/heads/*"
 }
 
