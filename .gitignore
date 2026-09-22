@@ -23,6 +23,7 @@ IOSLiveStreamSecrets*
 /Certificates.p12
 /vendor/
 
+infra/.terraform/
 infra/terraform.tfstate
 infra/terraform.tfstate.backup
 infra/terraform.tfstate.d/

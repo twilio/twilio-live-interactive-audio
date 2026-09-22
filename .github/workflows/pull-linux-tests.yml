@@ -31,11 +31,11 @@ jobs:
     steps:
       - uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
         with:
-          role-to-assume: arn:aws:iam::897837310411:role/twilio-live-interactive-audio-github-role
+          # Set the AWS_ROLE_ARN Actions Variable in repo settings. Actions
+          # Variables require repo write access to read via the API, so this
+          # keeps the ARN out of the workflow file (public repo hygiene).
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
           aws-region: us-east-1
-
-      - name: Verify assumed role
-        run: aws sts get-caller-identity
 
       - name: Resolve inputs
         id: resolve
