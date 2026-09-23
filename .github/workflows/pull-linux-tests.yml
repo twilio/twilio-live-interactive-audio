@@ -23,7 +23,7 @@ permissions:
 
 jobs:
   pull:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     env:
       BUCKET: cpp-test-artifacts
       PLATFORM: linux
