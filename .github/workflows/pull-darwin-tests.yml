@@ -23,7 +23,7 @@ permissions:
 
 jobs:
   pull:
-    runs-on: macos-latest
+    runs-on: macos-x64
     env:
       BUCKET: cpp-test-artifacts
       PLATFORM: darwin
