@@ -29,7 +29,7 @@ jobs:
       PLATFORM: darwin
       ARCH: arm64
     steps:
-      - uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
+      - uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838 # v1 — Twilio enterprise-allowlisted SHA
         with:
           # Set the AWS_ROLE_ARN Actions Variable in repo settings. Actions
           # Variables require repo write access to read via the API, so this
