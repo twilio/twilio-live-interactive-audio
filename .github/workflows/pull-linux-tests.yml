@@ -9,12 +9,26 @@ on:
         options: [voice, video]
         default: voice
       sha:
-        description: "Short SHA of the rtc-cpp build (leave empty for latest)"
+        description: "Short SHA of the rtc-cpp build (leave empty for latest under packages/)"
         required: false
         default: ""
   repository_dispatch:
     # Fired by rtc-cpp Buildkite after all linux+darwin builds land in S3.
-    # Payload: { "project": "voice"|"video", "sha": "<short-sha>" }
+    # Payload shape:
+    #   {
+    #     "project": "voice"|"video",
+    #     "sha": "<short-sha>",
+    #     "bucket": "cpp-test-artifacts",
+    #     "artifacts": [
+    #       { "platform": "linux",  "arch": "x86_64", "build_type": "debug",   "key": "packages/...tar.gz", "version_id": "..." },
+    #       { "platform": "linux",  "arch": "x86_64", "build_type": "release", ... },
+    #       { "platform": "darwin", "arch": "arm64",  "build_type": "debug",   ... },
+    #       { "platform": "darwin", "arch": "arm64",  "build_type": "release", ... }
+    #     ]
+    #   }
+    # We filter artifacts to our own platform (linux) and download by exact
+    # {key, version_id} so an S3 overwrite between dispatch and download
+    # doesn't feed us different bytes than the dispatcher signed off on.
     types: [rtc-cpp-tests-ready]
 
 permissions:
@@ -25,7 +39,6 @@ jobs:
   pull:
     runs-on: ubuntu-x64
     env:
-      BUCKET: cpp-test-artifacts
       PLATFORM: linux
       ARCH: x86_64
     steps:
@@ -37,79 +50,152 @@ jobs:
           role-to-assume: ${{ vars.AWS_ROLE_ARN }}
           aws-region: us-east-1
 
-      - name: Resolve inputs
+      - name: Resolve target artifacts
         id: resolve
         env:
           EVENT_NAME: ${{ github.event_name }}
-          PAYLOAD_PROJECT: ${{ github.event.client_payload.project }}
-          PAYLOAD_SHA: ${{ github.event.client_payload.sha }}
+          PAYLOAD_JSON: ${{ toJson(github.event.client_payload) }}
           INPUT_PROJECT: ${{ inputs.project }}
           INPUT_SHA: ${{ inputs.sha }}
         run: |
           set -euo pipefail
-          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
-            # Dispatched by rtc-cpp — the contract requires an explicit project.
-            # A silent 'voice' fallback here would mask a wrong-key dispatch and
-            # let the run go green against artifacts it wasn't meant to pull.
-            if [ -z "${PAYLOAD_PROJECT:-}" ]; then
-              echo "::error::repository_dispatch payload is missing 'project' (got: '${PAYLOAD_PROJECT:-}'). Refusing to fall back to a default."
-              exit 1
-            fi
-            PROJECT="$PAYLOAD_PROJECT"
-            SHA="${PAYLOAD_SHA:-}"
-          else
-            PROJECT="${INPUT_PROJECT:-voice}"
-            SHA="${INPUT_SHA:-}"
-          fi
-          case "$PROJECT" in
-            voice|video) ;;
-            *) echo "::error::invalid project '$PROJECT'"; exit 1 ;;
-          esac
-          echo "project=$PROJECT" >> "$GITHUB_OUTPUT"
-          echo "sha=$SHA"         >> "$GITHUB_OUTPUT"
-          echo "Resolved: project=$PROJECT sha='${SHA:-<latest>}'"
+          # Emits three GITHUB_OUTPUT lines:
+          #   project=voice|video
+          #   bucket=<bucket>
+          #   artifacts_json=<array of {build_type,key,version_id} filtered to PLATFORM+ARCH>
+          # For workflow_dispatch we resolve keys via list-objects-v2 (no version_id → mutable-key fallback).
+          # For repository_dispatch we take the artifacts array verbatim, which carries version_ids.
+          python3 <<'PY'
+          import json, os, re, subprocess, sys
+
+          event = os.environ["EVENT_NAME"]
+          platform = os.environ["PLATFORM"]
+          arch = os.environ["ARCH"]
+          out_path = os.environ["GITHUB_OUTPUT"]
+
+          def emit(k, v):
+              with open(out_path, "a") as f:
+                  f.write(f"{k}={v}\n")
+
+          # Hardcoded, not taken from the payload: anyone who can fire a
+          # repository_dispatch shouldn't be able to point the runner at a
+          # bucket of their choosing.
+          BUCKET = "cpp-test-artifacts"
+          SHA_RE = re.compile(r"[0-9a-f]{7,40}")
+          VERSION_ID_RE = re.compile(r"[A-Za-z0-9._-]{1,1024}")
+
+          def expected_key(project, bt, sha):
+              return f"packages/{project}-{platform}-{arch}-{bt}-{sha}.tar.gz"
+
+          if event == "repository_dispatch":
+              payload = json.loads(os.environ.get("PAYLOAD_JSON") or "null") or {}
+              project = payload.get("project")
+              if not project:
+                  sys.exit("::error::repository_dispatch payload missing 'project'")
+              if project not in ("voice", "video"):
+                  sys.exit(f"::error::invalid project '{project}'")
+              if payload.get("bucket") not in (None, BUCKET):
+                  sys.exit(f"::error::payload bucket '{payload.get('bucket')}' is not {BUCKET}")
+              sha = payload.get("sha") or ""
+              if not SHA_RE.fullmatch(sha):
+                  sys.exit(f"::error::payload sha '{sha}' is not a hex commit SHA")
+              all_artifacts = payload.get("artifacts") or []
+              # Filter to our own platform+arch (payload also carries the other platform).
+              mine = [a for a in all_artifacts if a.get("platform") == platform and a.get("arch") == arch]
+              if sorted(str(a.get("build_type")) for a in mine) != ["debug", "release"]:
+                  got = [a.get("build_type") for a in mine]
+                  sys.exit(f"::error::payload must carry exactly one debug and one release artifact for {platform}/{arch}, got {got}")
+              artifacts = []
+              for a in mine:
+                  bt, key, vid = a["build_type"], a.get("key"), a.get("version_id") or ""
+                  # The key must be exactly what the producer's naming scheme yields for
+                  # this project/platform/arch/build_type/sha — nothing outside packages/,
+                  # no other project, no other commit.
+                  want = expected_key(project, bt, sha)
+                  if key != want:
+                      sys.exit(f"::error::payload key for {bt} is '{key}', expected '{want}'")
+                  if not VERSION_ID_RE.fullmatch(vid):
+                      sys.exit(f"::error::payload version_id for {bt} is missing or malformed: '{vid}'")
+                  artifacts.append({"build_type": bt, "key": key, "version_id": vid})
+              print(f"repository_dispatch: {project}@{payload.get('sha')} — {len(artifacts)} artifacts for {platform}/{arch}")
+          else:
+              # workflow_dispatch: mutable-key resolution under packages/. No
+              # version_ids available — receiver acknowledges the trade.
+              project = os.environ.get("INPUT_PROJECT") or "voice"
+              if project not in ("voice", "video"):
+                  sys.exit(f"::error::invalid project '{project}'")
+              sha = os.environ.get("INPUT_SHA") or ""
+              if sha and not SHA_RE.fullmatch(sha):
+                  sys.exit(f"::error::sha input '{sha}' is not a hex commit SHA")
+
+              if not sha:
+                  # `Contents || ``[]``` guards the empty-prefix case: list-objects-v2
+                  # omits Contents entirely when nothing matches, and sort_by(null,...)
+                  # errors 255 rather than returning [].
+                  q = subprocess.run(
+                      ["aws", "s3api", "list-objects-v2",
+                       "--bucket", BUCKET,
+                       "--prefix", f"packages/{project}-{platform}-{arch}-",
+                       "--query", "sort_by(Contents || `[]`, &LastModified)[-1].Key",
+                       "--output", "text"],
+                      check=True, capture_output=True, text=True,
+                  )
+                  latest = q.stdout.strip()
+                  if not latest or latest == "None":
+                      sys.exit(f"::error::no tarballs found under s3://{BUCKET}/packages/{project}-{platform}-{arch}-*")
+                  # Basename format: <project>-<platform>-<arch>-<build_type>-<sha>.tar.gz
+                  # Known components contain no `-`, so last field is the SHA.
+                  base = os.path.basename(latest).removesuffix(".tar.gz")
+                  sha = base.rsplit("-", 1)[-1]
+                  print(f"workflow_dispatch: resolved latest SHA={sha} from {latest}")
+
+              artifacts = [
+                  {
+                      "build_type": bt,
+                      "key": expected_key(project, bt, sha),
+                      "version_id": "",
+                  }
+                  for bt in ("debug", "release")
+              ]
+
+          emit("project", project)
+          emit("bucket", BUCKET)
+          # Compact JSON, escape any newlines the shell might introduce.
+          emit("artifacts_json", json.dumps(artifacts, separators=(",", ":")))
+          PY
 
       - name: Download and untar debug + release
         env:
-          PROJECT: ${{ steps.resolve.outputs.project }}
-          SHA:     ${{ steps.resolve.outputs.sha }}
+          BUCKET: ${{ steps.resolve.outputs.bucket }}
+          ARTIFACTS_JSON: ${{ steps.resolve.outputs.artifacts_json }}
         run: |
           set -euo pipefail
           mkdir -p tests
           cd tests
 
-          # Resolve SHA once from the newest object across BOTH build_type prefixes,
-          # so debug and release can't drift to different commits (which would
-          # happen if we picked latest independently per prefix and one build_type
-          # from a newer commit landed while the other hadn't yet).
-          if [ -z "$SHA" ]; then
-            # `Contents || `[]`` guards the empty-prefix case: list-objects-v2
-            # omits Contents entirely when nothing matches, and sort_by(null,...)
-            # returns error 255 rather than an empty list — that would bypass the
-            # "no tarball found" branch below under `set -e`.
-            LATEST_KEY="$(aws s3api list-objects-v2 \
-              --bucket "$BUCKET" \
-              --prefix "${PROJECT}-${PLATFORM}-${ARCH}-" \
-              --query 'sort_by(Contents || `[]`, &LastModified)[-1].Key' \
-              --output text)"
-            if [ -z "$LATEST_KEY" ] || [ "$LATEST_KEY" = "None" ]; then
-              echo "::error::no tarballs found in s3://${BUCKET}/ matching ${PROJECT}-${PLATFORM}-${ARCH}-*"
-              exit 1
-            fi
-            # Key shape: <project>-<platform>-<arch>-<build_type>-<sha>.tar.gz
-            # The known components contain no dashes, so `awk -F- '{print $NF}'`
-            # on the basename minus .tar.gz gives the short SHA.
-            SHA="$(basename "$LATEST_KEY" .tar.gz | awk -F- '{print $NF}')"
-            echo "Resolved latest SHA=$SHA from $LATEST_KEY"
-          fi
-
-          for bt in debug release; do
-            KEY="${PROJECT}-${PLATFORM}-${ARCH}-${bt}-${SHA}.tar.gz"
-            echo "--- $bt : s3://${BUCKET}/${KEY}"
-            aws s3 cp "s3://${BUCKET}/${KEY}" .
-            mkdir -p "$bt"
-            tar -xzf "$(basename "$KEY")" -C "$bt"
-            rm -f "$(basename "$KEY")"
-            echo "extracted to tests/$bt:"
-            find "$bt" -maxdepth 3 -type f
-          done
+          # Iterate the artifacts array. For repository_dispatch, version_id is
+          # non-empty and we download the exact object version the dispatcher
+          # recorded. For workflow_dispatch, version_id is empty and we accept
+          # the mutable-key trade (documented in workflow_dispatch fallback).
+          echo "$ARTIFACTS_JSON" | python3 -c '
+          import json, os, subprocess, sys
+          bucket = os.environ["BUCKET"]
+          arts = json.loads(sys.stdin.read())
+          for a in arts:
+              bt = a["build_type"]
+              key = a["key"]
+              vid = a["version_id"]
+              print(f"--- {bt} : s3://{bucket}/{key}" + (f" (version {vid})" if vid else " (latest)"))
+              cmd = ["aws", "s3api", "get-object", "--bucket", bucket, "--key", key]
+              if vid:
+                  cmd += ["--version-id", vid]
+              cmd.append(f"{bt}.tar.gz")
+              subprocess.run(cmd, check=True)
+              subprocess.run(["mkdir", "-p", bt], check=True)
+              subprocess.run(["tar", "-xzf", f"{bt}.tar.gz", "-C", bt], check=True)
+              subprocess.run(["rm", "-f", f"{bt}.tar.gz"], check=True)
+              # Tarballs are staged with a `tests/` root by the producer so
+              # voice and video extract identically; expect `<bt>/tests/...`.
+              print(f"extracted to tests/{bt}:")
+              subprocess.run(["find", bt, "-maxdepth", "3", "-type", "f"], check=True)
+          '

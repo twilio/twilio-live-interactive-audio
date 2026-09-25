@@ -70,15 +70,25 @@ resource "aws_iam_role" "github" {
 }
 
 data "aws_iam_policy_document" "test_artifacts_read" {
+  # Read-only on the packages/ prefix rtc-cpp uploads to. GetObjectVersion is
+  # required for the dispatch path, which downloads with `--version-id`.
   statement {
-    effect    = "Allow"
-    actions   = ["s3:GetObject"]
-    resources = ["arn:aws:s3:::${local.test_bucket}/*"]
+    effect = "Allow"
+    actions = [
+      "s3:GetObject",
+      "s3:GetObjectVersion",
+    ]
+    resources = ["arn:aws:s3:::${local.test_bucket}/packages/*"]
   }
   statement {
     effect    = "Allow"
     actions   = ["s3:ListBucket"]
     resources = ["arn:aws:s3:::${local.test_bucket}"]
+    condition {
+      test     = "StringLike"
+      variable = "s3:prefix"
+      values   = ["packages/*", "packages/"]
+    }
   }
 }
 
