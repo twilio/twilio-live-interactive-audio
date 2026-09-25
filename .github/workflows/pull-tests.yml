@@ -1,4 +1,4 @@
-name: Pull Darwin tests
+name: Pull rtc-cpp tests
 
 on:
   workflow_dispatch:
@@ -26,9 +26,9 @@ on:
     #       { "platform": "darwin", "arch": "arm64",  "build_type": "release", ... }
     #     ]
     #   }
-    # We filter artifacts to our own platform (darwin) and download by exact
-    # {key, version_id} so an S3 overwrite between dispatch and download
-    # doesn't feed us different bytes than the dispatcher signed off on.
+    # Each matrix leg filters artifacts to its own platform/arch and downloads
+    # by exact {key, version_id}, so an S3 overwrite between dispatch and
+    # download doesn't feed us different bytes than the dispatcher signed off on.
     types: [rtc-cpp-tests-ready]
 
 permissions:
@@ -37,16 +37,41 @@ permissions:
 
 jobs:
   pull:
-    runs-on: macos-x64
+    name: pull (${{ matrix.platform }}-${{ matrix.arch }})
+    # One job definition for every platform, so the resolve/validate/download
+    # logic exists exactly once. Add a platform by adding a matrix entry.
+    strategy:
+      # A failure on one platform shouldn't cancel the other's run.
+      fail-fast: false
+      matrix:
+        include:
+          - platform: linux
+            arch: x86_64
+            runner: ubuntu-x64
+          - platform: darwin
+            arch: arm64
+            runner: macos-arm
+    runs-on: ${{ matrix.runner }}
+    # Bounded so a hung job can't sit holding credentials for GitHub's 6-hour
+    # default. Download + untar takes a couple of minutes.
+    timeout-minutes: 15
     env:
-      PLATFORM: darwin
-      ARCH: arm64
+      PLATFORM: ${{ matrix.platform }}
+      ARCH: ${{ matrix.arch }}
     steps:
       - uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838 # v1 — Twilio enterprise-allowlisted SHA
         with:
+          # Set the AWS_ROLE_ARN Actions Variable in repo settings. Actions
+          # Variables require repo write access to read via the API, so this
+          # keeps the ARN out of the workflow file (public repo hygiene).
           role-to-assume: ${{ vars.AWS_ROLE_ARN }}
           aws-region: us-east-1
 
+      # Logging policy: this repo is public, so its Actions logs are too, while
+      # rtc-cpp is private. Normal runs print only project/platform/build_type.
+      # rtc-cpp SHAs, S3 keys, version ids and extracted file names are printed
+      # only when RUNNER_DEBUG=1 ("Re-run jobs" → "Enable debug logging"), which
+      # requires repo write access to turn on.
       - name: Resolve target artifacts
         id: resolve
         env:
@@ -56,6 +81,12 @@ jobs:
           INPUT_SHA: ${{ inputs.sha }}
         run: |
           set -euo pipefail
+          # Emits three GITHUB_OUTPUT lines:
+          #   project=voice|video
+          #   bucket=<bucket>
+          #   artifacts_json=<array of {build_type,key,version_id} filtered to PLATFORM+ARCH>
+          # For workflow_dispatch we resolve keys via list-objects-v2 (no version_id → mutable-key fallback).
+          # For repository_dispatch we take the artifacts array from the payload, which carries version_ids.
           python3 <<'PY'
           import json, os, re, subprocess, sys
 
@@ -63,6 +94,7 @@ jobs:
           platform = os.environ["PLATFORM"]
           arch = os.environ["ARCH"]
           out_path = os.environ["GITHUB_OUTPUT"]
+          debug = os.environ.get("RUNNER_DEBUG") == "1"
 
           def emit(k, v):
               with open(out_path, "a") as f:
@@ -108,8 +140,9 @@ jobs:
                   if not VERSION_ID_RE.fullmatch(vid):
                       sys.exit(f"::error::payload version_id for {bt} is missing or malformed: '{vid}'")
                   artifacts.append({"build_type": bt, "key": key, "version_id": vid})
-              print(f"repository_dispatch: {project}@{payload.get('sha')} — {len(artifacts)} artifacts for {platform}/{arch}")
           else:
+              # workflow_dispatch: mutable-key resolution under packages/. No
+              # version_ids available — receiver acknowledges the trade.
               project = os.environ.get("INPUT_PROJECT") or "voice"
               if project not in ("voice", "video"):
                   sys.exit(f"::error::invalid project '{project}'")
@@ -118,6 +151,9 @@ jobs:
                   sys.exit(f"::error::sha input '{sha}' is not a hex commit SHA")
 
               if not sha:
+                  # `Contents || ``[]``` guards the empty-prefix case: list-objects-v2
+                  # omits Contents entirely when nothing matches, and sort_by(null,...)
+                  # errors 255 rather than returning [].
                   q = subprocess.run(
                       ["aws", "s3api", "list-objects-v2",
                        "--bucket", BUCKET,
@@ -129,9 +165,14 @@ jobs:
                   latest = q.stdout.strip()
                   if not latest or latest == "None":
                       sys.exit(f"::error::no tarballs found under s3://{BUCKET}/packages/{project}-{platform}-{arch}-*")
+                  # Basename format: <project>-<platform>-<arch>-<build_type>-<sha>.tar.gz
+                  # Known components contain no `-`, so last field is the SHA.
                   base = os.path.basename(latest).removesuffix(".tar.gz")
                   sha = base.rsplit("-", 1)[-1]
-                  print(f"workflow_dispatch: resolved latest SHA={sha} from {latest}")
+                  # Same check every other SHA path gets, so a key outside the
+                  # naming scheme fails here rather than as a 404 downstream.
+                  if not SHA_RE.fullmatch(sha):
+                      sys.exit(f"::error::latest key '{latest}' doesn't match <project>-<platform>-<arch>-<build_type>-<sha>.tar.gz")
 
               artifacts = [
                   {
@@ -142,8 +183,14 @@ jobs:
                   for bt in ("debug", "release")
               ]
 
+          print(f"{event}: {project} — {len(artifacts)} artifacts for {platform}/{arch}")
+          if debug:
+              print(f"::debug::sha={sha} artifacts={json.dumps(artifacts)}")
+
           emit("project", project)
           emit("bucket", BUCKET)
+          # json.dumps escapes any newlines inside values, and `separators`
+          # drops the whitespace, so this is always one GITHUB_OUTPUT line.
           emit("artifacts_json", json.dumps(artifacts, separators=(",", ":")))
           PY
 
@@ -156,25 +203,42 @@ jobs:
           mkdir -p tests
           cd tests
 
+          # Iterate the artifacts array. For repository_dispatch, version_id is
+          # non-empty and we download the exact object version the dispatcher
+          # recorded. For workflow_dispatch, version_id is empty and we accept
+          # the mutable-key trade (documented in workflow_dispatch fallback).
           echo "$ARTIFACTS_JSON" | python3 -c '
           import json, os, subprocess, sys
           bucket = os.environ["BUCKET"]
+          debug = os.environ.get("RUNNER_DEBUG") == "1"
           arts = json.loads(sys.stdin.read())
           for a in arts:
               bt = a["build_type"]
               key = a["key"]
               vid = a["version_id"]
-              print(f"--- {bt} : s3://{bucket}/{key}" + (f" (version {vid})" if vid else " (latest)"))
+              print(f"--- {bt}" + (" (pinned version)" if vid else " (latest)"))
+              if debug:
+                  shown_vid = vid or "<latest>"
+                  print(f"::debug::s3://{bucket}/{key} version={shown_vid}")
               cmd = ["aws", "s3api", "get-object", "--bucket", bucket, "--key", key]
               if vid:
                   cmd += ["--version-id", vid]
               cmd.append(f"{bt}.tar.gz")
-              subprocess.run(cmd, check=True)
+              # get-object prints the response (VersionId, ETag, metadata) as
+              # JSON on stdout; keep it out of the public log. Errors still go
+              # to stderr.
+              subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL)
               subprocess.run(["mkdir", "-p", bt], check=True)
               subprocess.run(["tar", "-xzf", f"{bt}.tar.gz", "-C", bt], check=True)
               subprocess.run(["rm", "-f", f"{bt}.tar.gz"], check=True)
               # Tarballs are staged with a `tests/` root by the producer so
               # voice and video extract identically; expect `<bt>/tests/...`.
-              print(f"extracted to tests/{bt}:")
-              subprocess.run(["find", bt, "-maxdepth", "3", "-type", "f"], check=True)
+              files = subprocess.run(["find", bt, "-type", "f"], check=True,
+                                     capture_output=True, text=True).stdout.split()
+              if not files:
+                  sys.exit(f"::error::{bt} tarball extracted no files")
+              print(f"extracted {len(files)} files to tests/{bt}")
+              if debug:
+                  for f in files:
+                      print(f"::debug::{f}")
           '
